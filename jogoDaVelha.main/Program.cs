@@ -1,5 +1,13 @@
 ﻿bool b = false;
 
+// Variaveis globais
+char[,] tabuleiro = new char[3, 3];
+
+
+
+
+// ========================================================|
+
 Console.WriteLine("|=======================================================|");
 Console.WriteLine("|||||||||||||||||||---MENU PRINCIPAL---||||||||||||||||||");
 Console.WriteLine("|=======================================================|");
@@ -26,7 +34,7 @@ while (!b)
     {
         case 1:
 
-            InicieJogadorVSJogador();
+            InicieJogadorVSJogador(tabuleiro);
             break;
 
         case 2:
@@ -49,11 +57,36 @@ while (!b)
             break;
     }
 
-    static void InicieJogadorVSJogador()
+    static void JogoDaVelha(char[,] tabuleiro)
+    {
+        
+    }
+
+    static void InicieJogadorVSJogador(char[,] tabuleiro)
     {
         Console.WriteLine("|====================================|");
         Console.WriteLine("|Modo selecionado: Jogador vs Jogador|");
         Console.WriteLine("|====================================|");
+
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                tabuleiro[i, j] = ' ';
+            }
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                Console.Write(tabuleiro[i, j]);
+                if (j < 2) Console.Write("|");
+            }
+            Console.WriteLine();
+            if (i < 2) Console.WriteLine("-----");
+        }
+
     }
 
     static void InicieJogadorVSPc()
@@ -94,7 +127,6 @@ while (!b)
     {
         Console.WriteLine("==Ranking top10 atualizadao==");
     }
-
 
     if (modoDeJogoConvert == 3)
     {

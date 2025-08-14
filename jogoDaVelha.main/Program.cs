@@ -1,7 +1,6 @@
 ﻿bool b = false;
 
 Console.WriteLine("|=======================================================|");
-
 Console.WriteLine("|||||||||||||||||||---MENU PRINCIPAL---||||||||||||||||||");
 Console.WriteLine("|=======================================================|");
 
@@ -13,6 +12,7 @@ while (!b)
     Console.WriteLine("1 - Jogador vs Jogador");
     Console.WriteLine("2 - Jogador vs Computador");
     Console.WriteLine("3 - Sair do jogo");
+    Console.WriteLine("4 - Exibir Ranking");
     Console.Write("Selecione: ");
 
     string modoDeJogo = Console.ReadLine();
@@ -25,17 +25,26 @@ while (!b)
     switch (modoDeJogoConvert)
     {
         case 1:
+
             InicieJogadorVSJogador();
-         
-            
             break;
+
         case 2:
+
             InicieJogadorVSPc();
             break;
+
         case 3:
+
             Console.WriteLine("Jogo encerrado!");
             break;
+
+        case 4:
+            ExibirRanking();
+            break;
+
         default:
+
             Console.WriteLine("Tecla inválida :(");
             break;
     }
@@ -81,6 +90,11 @@ while (!b)
         Console.WriteLine("==Modo Dificil==");
     }
 
+    static void ExibirRanking()
+    {
+        Console.WriteLine("==Ranking top10 atualizadao==");
+    }
+
 
     if (modoDeJogoConvert == 3)
     {
@@ -88,4 +102,10 @@ while (!b)
     }
 }
 
+// Filho do CAOS que acabou com nossa felicidade
+// vvvvvvvvvvvvvv
+
 // Teste pra ve se o bagua me aceita la
+
+// ^^^^^^^^^^^^^^
+// NÃO MEXER NO FILHO DO CAOS, ELE É O QUE FAZ O JOGO FUNCIONAR

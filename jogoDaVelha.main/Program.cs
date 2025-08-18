@@ -1,6 +1,13 @@
-﻿bool b = false;
+﻿
 
-// Variaveis globais
+
+
+// =======================================================|
+
+// Variáveis Globais
+
+
+bool b = false;
 char[,] tabuleiro = new char[3, 3];
 
 
@@ -8,25 +15,25 @@ char[,] tabuleiro = new char[3, 3];
 
 // ========================================================|
 
+
 Console.WriteLine("|=======================================================|");
 Console.WriteLine("|||||||||||||||||||---MENU PRINCIPAL---||||||||||||||||||");
 Console.WriteLine("|=======================================================|");
 
-while (!b)
+Console.WriteLine("Bem vindo ao jogo da velha!");
+Console.WriteLine("Escolha o modo de jogo: ");
+Console.WriteLine("1 - Jogador vs Jogador");
+Console.WriteLine("2 - Jogador vs Computador");
+Console.WriteLine("3 - Exibir Ranking");
+Console.WriteLine("4 - Sair do Jogo");
+Console.Write("Selecione: ");
+
+string modoDeJogo = Console.ReadLine();
+int modoDeJogoConvert = Convert.ToInt32(modoDeJogo);
+
+do
 {
-
-    Console.WriteLine("Sempre que quiser sair do jogo aperte 'S'");
-    Console.WriteLine("Escolha o modo de jogo: ");
-    Console.WriteLine("1 - Jogador vs Jogador");
-    Console.WriteLine("2 - Jogador vs Computador");
-    Console.WriteLine("3 - Sair do jogo");
-    Console.WriteLine("4 - Exibir Ranking");
-    Console.Write("Selecione: ");
-
-    string modoDeJogo = Console.ReadLine();
-    int modoDeJogoConvert = Convert.ToInt32(modoDeJogo);
-
-
+   
     Console.Clear();
    
 
@@ -44,11 +51,11 @@ while (!b)
 
         case 3:
 
-            Console.WriteLine("Jogo encerrado!");
+            ExibirRanking();
             break;
 
         case 4:
-            ExibirRanking();
+            Console.WriteLine("Jogo encerrado!");
             break;
 
         default:
@@ -76,6 +83,7 @@ while (!b)
             }
         }
 
+
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
@@ -85,7 +93,9 @@ while (!b)
             }
             Console.WriteLine();
             if (i < 2) Console.WriteLine("-----");
+
         }
+
 
     }
 
@@ -113,6 +123,10 @@ while (!b)
         }
 
     }
+
+    // Ainda não estamos utilizando esses métodos, mas eles serão usados no futuro || Favor não apagar
+
+
     static void InicieModoFacil()
     {
         Console.WriteLine("==Modo Fácil===");
@@ -125,14 +139,27 @@ while (!b)
 
     static void ExibirRanking()
     {
-        Console.WriteLine("==Ranking top10 atualizadao==");
+        Console.WriteLine("==Ranking top10 atualizadao.com.br da silva==");
     }
 
-    if (modoDeJogoConvert == 3)
+    if (modoDeJogoConvert == 3) // Verificação para ver se o usuário escolheu sair do jogo
     {
         b = true;
     }
 }
+
+while (!b);
+
+
+
+
+
+
+
+
+
+// ========================================================|
+// Setor do nosso querido amigo, o Filho do CAOS
 
 // Filho do CAOS que acabou com nossa felicidade
 // vvvvvvvvvvvvvv
@@ -141,3 +168,5 @@ while (!b)
 
 // ^^^^^^^^^^^^^^
 // NÃO MEXER NO FILHO DO CAOS, ELE É O QUE FAZ O JOGO FUNCIONAR
+
+// ========================================================|

@@ -11,8 +11,6 @@ bool b = false;
 char[,] tabuleiro = new char[3, 3];
 
 
-
-
 // ========================================================|
 
 
@@ -37,7 +35,7 @@ do
     Console.Clear();
    
 
-    switch (modoDeJogoConvert)
+    switch (modoDeJogoConvert) // Todas as opções do Switch estão rodando em loop infinito, ainda não consegui resolver || - marcZ
     {
         case 1:
 
@@ -56,11 +54,13 @@ do
 
         case 4:
             Console.WriteLine("Jogo encerrado!");
+            modoDeJogoConvert = 4;
+            b = true; // encerra o loop "do while" (se pá) || - marcZ
             break;
 
         default:
 
-            Console.WriteLine("Tecla inválida :(");
+            Console.WriteLine("Tecla inválida, tente novamente.");
             break;
     }
 
@@ -89,10 +89,10 @@ do
             for (int j = 0; j < 3; j++)
             {
                 Console.Write(tabuleiro[i, j]);
-                if (j < 2) Console.Write("|");
+                if (j < 2) Console.Write(" | ");
             }
             Console.WriteLine();
-            if (i < 2) Console.WriteLine("-----");
+            if (i < 2) Console.WriteLine("---+---+---");
 
         }
 
@@ -142,18 +142,13 @@ do
         Console.WriteLine("==Ranking top10 atualizadao.com.br da silva==");
     }
 
-    if (modoDeJogoConvert == 3) // Verificação para ver se o usuário escolheu sair do jogo
+    if (modoDeJogoConvert == 4) // Verificação para ver se o usuário escolheu sair do jogo
     {
         b = true;
     }
 }
 
 while (!b);
-
-
-
-
-
 
 
 

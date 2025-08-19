@@ -1,14 +1,10 @@
-﻿
-
-
-
-// =======================================================|
+﻿// =======================================================|
 
 // Variáveis Globais
 
 
 bool b = false;
-char[,] tabuleiro = new char[3, 3];
+char[,] tabuleiro = new char[3, 3]; // a virgula [,] indica que é uma matriz e não um array
 
 
 // ========================================================|
@@ -55,16 +51,75 @@ int modoDeJogoConvert = Convert.ToInt32(modoDeJogo);
             b = true; // encerra o loop "do while" (se pá) || - marcZ
             break;
 
+        case 5:
+        JogoDaVelha();
+            break;
+
         default:
 
             Console.WriteLine("Tecla inválida, tente novamente.");
             break;
     }
+static void JogoDaVelha()
+{
+    string[,] tabuleiro = new string[3, 3]; // a virgula [,] indica que é uma matriz e não um array
+    string turno = "X";
+    int contadorTurnos = 0;
+    int mioloDoTabuleiro = 1;
 
-    static void JogoDaVelha(char[,] tabuleiro)
-    {
-        
+
+
+    for (int i = 0; i < tabuleiro.GetLength(0); i++)//get lenght começa na posicao que eu quero (pesquisar melhor sobre isso)  // linha
+    { 
+       for (int j = 0; j < tabuleiro.GetLength(1); j++) // coluna
+        {
+            tabuleiro[i, j] = " ";
+        }
+
     }
+    // esse segundo for é quem imprime a matriz na tela
+    for (int i = 0; i < tabuleiro.GetLength(0); i++) //getlenght(0) eu estou selecionando a linha da matriz
+    {
+        for (int j = 0; j < tabuleiro.GetLength(1); j++)
+        {
+            Console.Write(tabuleiro[i, j]); //interessane usar o console.write apenas pq se nao fica tudo um em baixo do outro
+            Console.Write(mioloDoTabuleiro);
+            if (j < 2) Console.Write("  | ");
+            mioloDoTabuleiro++;
+        }
+        Console.WriteLine();
+        if (i < 2) Console.WriteLine("----+-----+-----");
+
+    }
+
+    while(contadorTurnos < 9)
+    {
+        string jogada; //lembrar de colocar variavel em branco do jeito do giancarlo
+        Console.WriteLine("O jogador X comeca");
+        jogada = Console.ReadLine();
+
+
+
+        for (int i = 0; i < tabuleiro.GetLength(0); i++) 
+        {
+            for (int j = 0; j < tabuleiro.GetLength(1); j++)
+            {
+                Console.Write(tabuleiro[i, j]);
+                Console.Write(mioloDoTabuleiro);
+                if (j < 2) Console.Write("  | ");
+                mioloDoTabuleiro++;
+            }
+            Console.WriteLine();
+            if (i < 2) Console.WriteLine("----+-----+-----");
+
+        }
+
+
+        contadorTurnos++;
+    }
+
+
+}
 
     static void InicieJogadorVSJogador(char[,] tabuleiro)
     {

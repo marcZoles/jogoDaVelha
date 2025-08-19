@@ -26,6 +26,14 @@ string modoDeJogo = Console.ReadLine();
 int modoDeJogoConvert = Convert.ToInt32(modoDeJogo);
    
     Console.Clear();
+
+
+
+
+
+
+
+
    
 
     switch (modoDeJogoConvert) // Todas as opções do Switch estão rodando em loop infinito, ainda não consegui resolver || - marcZ
@@ -60,62 +68,100 @@ int modoDeJogoConvert = Convert.ToInt32(modoDeJogo);
             Console.WriteLine("Tecla inválida, tente novamente.");
             break;
     }
+
+
 static void JogoDaVelha()
 {
-    string[,] tabuleiro = new string[3, 3]; // a virgula [,] indica que é uma matriz e não um array
+    string[,] tabuleiro = new string[3, 3];
     string turno = "X";
     int contadorTurnos = 0;
     int mioloDoTabuleiro = 1;
 
 
-
-    for (int i = 0; i < tabuleiro.GetLength(0); i++)//get lenght começa na posicao que eu quero (pesquisar melhor sobre isso)  // linha
+    //for que preenche a matriz com os numeros de 1 a 9, ou seja, o miolo do tabuleiro
+    for (int i = 0; i < tabuleiro.GetLength(0); i++)//get lenght (pesquisar melhor sobre isso)
     { 
-       for (int j = 0; j < tabuleiro.GetLength(1); j++) // coluna
+       for (int j = 0; j < tabuleiro.GetLength(1); j++)
         {
-            tabuleiro[i, j] = " ";
+            tabuleiro[i, j] = mioloDoTabuleiro.ToString();//melhorar essa conversao para string se possível
+            mioloDoTabuleiro++;
         }
 
     }
     // esse segundo for é quem imprime a matriz na tela
-    for (int i = 0; i < tabuleiro.GetLength(0); i++) //getlenght(0) eu estou selecionando a linha da matriz
+    for (int i = 0; i < tabuleiro.GetLength(0); i++)
     {
         for (int j = 0; j < tabuleiro.GetLength(1); j++)
         {
-            Console.Write(tabuleiro[i, j]); //interessane usar o console.write apenas pq se nao fica tudo um em baixo do outro
-            Console.Write(mioloDoTabuleiro);
+            Console.Write(tabuleiro[i, j]);
             if (j < 2) Console.Write("  | ");
-            mioloDoTabuleiro++;
+            
         }
         Console.WriteLine();
-        if (i < 2) Console.WriteLine("----+-----+-----");
+        if (i < 2) Console.WriteLine("---+----+----");
 
     }
 
-    while(contadorTurnos < 9)
+    // Esse while é o que controla o jogo, ele vai rodar enquanto o contador de turnos for menor que 9, ou seja, enquanto houver jogadas possíveis
+    while (contadorTurnos < 9)
     {
-        string jogada; //lembrar de colocar variavel em branco do jeito do giancarlo
-        Console.WriteLine("O jogador X comeca");
-        jogada = Console.ReadLine();
+        Console.WriteLine("|====================================|");
+        Console.WriteLine($"|========| O jogador {turno} joga |========|");
+        Console.WriteLine("|====================================|");
+        string jogada = Console.ReadLine();
 
+        // Aqui eu estou verificando se a jogada é válida, ou seja, se o jogador digitou um número de 1 a 9
+        // Se for valida ele atualiza o tabuleiro
+        for (int i = 0; i < tabuleiro.GetLength(0); i++)
+                                                     
+        {
+            for (int j = 0; j < tabuleiro.GetLength(1); j++)
+            {
+                if(jogada == tabuleiro[i, j])
+                {
+                    tabuleiro[i, j] = turno;
 
+                }
+            }
 
-        for (int i = 0; i < tabuleiro.GetLength(0); i++) 
+        }
+
+        // Aqui eu estou imprimindo o tabuleiro atualizado na tela
+        for (int i = 0; i < tabuleiro.GetLength(0); i++)
         {
             for (int j = 0; j < tabuleiro.GetLength(1); j++)
             {
                 Console.Write(tabuleiro[i, j]);
-                Console.Write(mioloDoTabuleiro);
                 if (j < 2) Console.Write("  | ");
-                mioloDoTabuleiro++;
             }
             Console.WriteLine();
-            if (i < 2) Console.WriteLine("----+-----+-----");
+            if (i < 2) Console.WriteLine("---+----+----");
+        }
+
+
+        //comeco a verificar se o jogador ganhou, ou seja, se ele conseguiu fazer uma linha, coluna ou diagonal com o mesmo simbolo
+        // ta fucionando, agora é so replicar para TODAS as as possibilidades de vitoria (emoji de caveira)
+        if (contadorTurnos > 3)
+        {
+            if (tabuleiro[0, 0] == tabuleiro[0, 1] && tabuleiro[0, 1] == tabuleiro[0, 2])
+            {
+                Console.WriteLine($"Jogador {turno} VENCEUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU ");
+
+            }
 
         }
 
 
-        contadorTurnos++;
+
+            contadorTurnos++;
+        if(contadorTurnos % 2 == 0) 
+        {
+            turno = "X";
+        }
+        else
+        {
+            turno = "O";
+        }
     }
 
 
@@ -197,6 +243,7 @@ static void JogoDaVelha()
     {
         b = true;
     }
+
 
 
 

@@ -28,9 +28,6 @@ Console.Write("Selecione: ");
 
 string modoDeJogo = Console.ReadLine();
 int modoDeJogoConvert = Convert.ToInt32(modoDeJogo);
-
-do
-{
    
     Console.Clear();
    
@@ -74,28 +71,27 @@ do
         Console.WriteLine("|====================================|");
         Console.WriteLine("|Modo selecionado: Jogador vs Jogador|");
         Console.WriteLine("|====================================|");
-
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
+        
+            for (int i = 0; i < 3; i++)
             {
-                tabuleiro[i, j] = ' ';
+                for (int j = 0; j < 3; j++)
+                {
+                    tabuleiro[i, j] = ' ';
+                }
             }
-        }
 
 
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
+            for (int i = 0; i < 3; i++)
             {
-                Console.Write(tabuleiro[i, j]);
-                if (j < 2) Console.Write(" | ");
+                for (int j = 0; j < 3; j++)
+                {
+                    Console.Write(tabuleiro[i, j]);
+                    if (j < 2) Console.Write(" | ");
+                }
+                Console.WriteLine();
+                if (i < 2) Console.WriteLine("---+---+---");
+
             }
-            Console.WriteLine();
-            if (i < 2) Console.WriteLine("---+---+---");
-
-        }
-
 
     }
 
@@ -146,9 +142,6 @@ do
     {
         b = true;
     }
-}
-
-while (!b);
 
 
 

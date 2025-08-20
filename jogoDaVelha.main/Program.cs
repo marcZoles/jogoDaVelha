@@ -1,5 +1,8 @@
 ﻿// =======================================================|
 
+// TRABALHO DE CONCLUSÃO DE MATÉRIA - JOGO DA VELHA EM C#
+// FEITO POR: Gabriel Marczal; Bianca Michoski; Thays Colaço; José Guides
+
 // Variáveis Globais
 
 Console.BackgroundColor = ConsoleColor.Gray;

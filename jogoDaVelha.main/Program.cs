@@ -3,6 +3,15 @@
 // TRABALHO DE CONCLUSÃO DE MATÉRIA - JOGO DA VELHA EM C#
 // FEITO POR: Gabriel Marczal; Bianca Michoski; Thays Colaço; José Guides
 
+// ========================================================|
+
+//                SETOR DE COMENTÁRIOS
+
+// Já estou dando uma olhada em como fazer o ranking funcionar sem problemas, até então, favor não mexer nesse método || - marcZ
+
+
+// ========================================================|
+
 // Variáveis Globais
 
 Console.BackgroundColor = ConsoleColor.Gray;
@@ -34,17 +43,9 @@ string modoDeJogo = Console.ReadLine();
 int modoDeJogoConvert = Convert.ToInt32(modoDeJogo);
    
     Console.Clear();
-
-
-
-
-
-
-
-
    
 
-    switch (modoDeJogoConvert) // Todas as opções do Switch estão rodando em loop infinito, ainda não consegui resolver || - marcZ
+    switch (modoDeJogoConvert) // Problema do loop infinito foi corrigido pelo José & Thays, agora tá funcionando filé || - marcZ
     {
         case 1:
 
@@ -64,7 +65,7 @@ int modoDeJogoConvert = Convert.ToInt32(modoDeJogo);
         case 4:
             Console.WriteLine("Jogo encerrado!");
             modoDeJogoConvert = 4;
-            b = true; // encerra o loop "do while" (se pá) || - marcZ
+            b = true;
             break;
 
         case 5:
@@ -251,7 +252,7 @@ static void JogoDaVelha()
         Console.WriteLine("==Modo Dificil==");
     }
 
-    static void ExibirRanking()
+    static void ExibirRanking() // Já estou trabalhando neste método do ranking, favor não mexer || - marcZ
     {
         Console.WriteLine("==Ranking top10 atualizadao.com.br da silva==");
     }

@@ -358,3 +358,5 @@ while (!b)
 // NÃO MEXER NO FILHO DO CAOS, ELE É O QUE FAZ O JOGO FUNCIONAR
 
 // ========================================================|
+
+//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

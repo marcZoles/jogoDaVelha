@@ -2,7 +2,9 @@
 
 // Variáveis Globais
 
-
+Console.BackgroundColor = ConsoleColor.Gray;
+Console.ForegroundColor = ConsoleColor.Black;
+Console.Clear();
 bool b = false;
 char[,] tabuleiro = new char[3, 3]; // a virgula [,] indica que é uma matriz e não um array
 
@@ -145,7 +147,7 @@ static void JogoDaVelha()
         {
             if (tabuleiro[0, 0] == tabuleiro[0, 1] && tabuleiro[0, 1] == tabuleiro[0, 2])
             {
-                Console.WriteLine($"Jogador {turno} VENCEUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU ");
+                Console.WriteLine($"Jogador {turno} VENCEUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU :))))))))");
 
             }
 

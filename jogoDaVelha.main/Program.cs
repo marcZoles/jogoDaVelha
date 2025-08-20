@@ -7,7 +7,10 @@ Console.ForegroundColor = ConsoleColor.Black;
 Console.Clear();
 bool b = false;
 char[,] tabuleiro = new char[3, 3]; // a virgula [,] indica que é uma matriz e não um array
-
+string jogador1 = "X";
+string jogador2 = "O";
+int rankingJ1 = 0;
+int rankingJ2 = 0;
 
 // ========================================================|
 
@@ -74,6 +77,10 @@ int modoDeJogoConvert = Convert.ToInt32(modoDeJogo);
 
 static void JogoDaVelha()
 {
+    string jogador1 = "X";
+    string jogador2 = "O";
+    int rankingJ1 = 0;
+    int rankingJ2 = 0;
     string[,] tabuleiro = new string[3, 3];
     string turno = "X";
     int contadorTurnos = 0;
@@ -148,13 +155,18 @@ static void JogoDaVelha()
             if (tabuleiro[0, 0] == tabuleiro[0, 1] && tabuleiro[0, 1] == tabuleiro[0, 2])
             {
                 Console.WriteLine($"Jogador {turno} VENCEUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU :))))))))");
-
+                if (turno == "X")
+                {
+                    rankingJ1++;
+                    Console.WriteLine($"Jogador {turno} agora tem {rankingJ1} vitória no ranking."); 
+                }
+                else
+                {
+                    rankingJ2++;
+                    Console.WriteLine($"Jogador {turno} agora tem {rankingJ2} vitória no ranking.");
+                }
             }
-
         }
-
-
-
             contadorTurnos++;
         if(contadorTurnos % 2 == 0) 
         {

@@ -33,10 +33,10 @@ Console.WriteLine("|=======================================================|");
 
 Console.WriteLine("Bem vindo ao jogo da velha!");
 Console.WriteLine("Escolha o modo de jogo: ");
-Console.WriteLine("1 - Jogador vs Jogador");
-Console.WriteLine("2 - Jogador vs Computador");
-Console.WriteLine("3 - Exibir Ranking");
-Console.WriteLine("4 - Sair do Jogo");
+Console.WriteLine("1 ►Jogador vs Jogador");
+Console.WriteLine("2 ►Jogador vs Computador");
+Console.WriteLine("3 ►Exibir Ranking");
+Console.WriteLine("4 ►Sair do Jogo");
 Console.Write("Selecione: ");
 
 string modoDeJogo = Console.ReadLine();
@@ -156,6 +156,7 @@ static void JogoDaVelha()
         // ta fucionando, agora é so replicar para TODAS as as possibilidades de vitoria (emoji de caveira)
         if (contadorTurnos > 3)
         {
+            /*
             if (tabuleiro[0, 0] == tabuleiro[0, 1] && tabuleiro[0, 1] == tabuleiro[0, 2])
             {
                 Console.WriteLine($"Jogador {turno} VENCEUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU :))))))))");
@@ -169,6 +170,25 @@ static void JogoDaVelha()
                     rankingJ2++;
                     Console.WriteLine($"Jogador {turno} agora tem {rankingJ2} vitória no ranking.");
                 }
+            */
+            for (int i = 0; i < 3; i++) //ele ira verificar as 3 linhas (0, 1, 2)
+            {
+                if (tabuleiro[i, 0] != " " && // Verifica se a primeira linha não está vazia - Thais
+                    tabuleiro[i, 0] == tabuleiro[i, 1] && // verifica se a primeira linha é igual a segunda - Thais
+                    tabuleiro[i, 1] == tabuleiro[i, 2]) // verifica se a segunda linha é igual a terceira - Thais
+                {
+                    Console.WriteLine($"Jogador {turno} VENCEUUUUUUUU");
+                if (turno == "X")
+                    {
+                        rankingJ1++;
+                        Console.WriteLine($"Jogador {turno} agora tem {rankingJ1} vitória no ranking.");
+                        
+                    } else
+                    {
+                        rankingJ2++;
+                        Console.WriteLine($"Jogador {turno} agora tem {rankingJ2} vitória no ranking.");
+                    }
+            }
             }
         }
             contadorTurnos++;

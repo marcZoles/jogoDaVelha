@@ -66,7 +66,7 @@ while (!b)
 
         case 3:
 
-            ExibirRanking();
+            ExibirRanking(rankingJ1, rankingJ2);
             break;
 
         case 4:
@@ -330,10 +330,12 @@ while (!b)
         Console.WriteLine("==Modo Dificil==");
     }
 
-    static void ExibirRanking() // Já estou trabalhando neste método do ranking, favor não mexer || - marcZ
+    static void ExibirRanking(int rankingJ1, int rankingJ2) // Já estou trabalhando neste método do ranking, favor não mexer || - marcZ
     {
         Console.WriteLine("==Ranking top10 atualizadao.com.br da silva==");
-    }
+        Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
+        Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
+}
 
     if (modoDeJogoConvert == 4) // Verificação para ver se o usuário escolheu sair do jogo
     {

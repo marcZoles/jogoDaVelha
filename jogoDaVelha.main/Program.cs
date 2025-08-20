@@ -175,7 +175,7 @@ while (!b)
                         Console.WriteLine(mensagemVitoria);
                         if (turno == "X")
                         {
-                            rankingJ1++;
+                            rankingJ1++; // verificar se o ranking está correto e se não precisa fazer "return rankingJ1++" || - marcZ
                             Console.WriteLine($"O jogador {turno} tem " + i + " vitorias");
 
                         }
@@ -254,7 +254,10 @@ while (!b)
 
 
     }
+
     // ========================================================================================================//
+
+
     static void InicieJogadorVSJogador(char[,] tabuleiro)
     {
         Console.WriteLine("|====================================|");
@@ -283,6 +286,7 @@ while (!b)
         }
 
     }
+
     // ========================================================================================================//
 
     static void InicieJogadorVSPc()
@@ -360,3 +364,4 @@ while (!b)
 // ========================================================|
 
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+// Boa noite Filho do Caos || - marcZ

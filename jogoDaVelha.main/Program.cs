@@ -89,8 +89,8 @@ static void JogoDaVelha()
     string turno = "X";
     int contadorTurnos = 0;
     int mioloDoTabuleiro = 1;
-
-
+    string mensagemVitoria = $"Jogador {turno} VENCEUUUUUUUU ::))))";
+    
     //for que preenche a matriz com os numeros de 1 a 9, ou seja, o miolo do tabuleiro
     for (int i = 0; i < tabuleiro.GetLength(0); i++)//get lenght (pesquisar melhor sobre isso)
     { 
@@ -156,39 +156,79 @@ static void JogoDaVelha()
         // ta fucionando, agora é so replicar para TODAS as as possibilidades de vitoria (emoji de caveira)
         if (contadorTurnos > 3)
         {
-            /*
-            if (tabuleiro[0, 0] == tabuleiro[0, 1] && tabuleiro[0, 1] == tabuleiro[0, 2])
+           
+            for (int i = 1; i < 3; i++) //ele ira verificar as 3 linhas (0, 1, 2)
             {
-                Console.WriteLine($"Jogador {turno} VENCEUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU :))))))))");
-                if (turno == "X")
-                {
-                    rankingJ1++;
-                    Console.WriteLine($"Jogador {turno} agora tem {rankingJ1} vitória no ranking."); 
-                }
-                else
-                {
-                    rankingJ2++;
-                    Console.WriteLine($"Jogador {turno} agora tem {rankingJ2} vitória no ranking.");
-                }
-            */
-            for (int i = 0; i < 3; i++) //ele ira verificar as 3 linhas (0, 1, 2)
-            {
-                if (tabuleiro[i, 0] != " " && // Verifica se a primeira linha não está vazia - Thais
+                if (tabuleiro[i, 0] != "" && // Verifica se a primeira linha não está vazia - Thais
                     tabuleiro[i, 0] == tabuleiro[i, 1] && // verifica se a primeira linha é igual a segunda - Thais
                     tabuleiro[i, 1] == tabuleiro[i, 2]) // verifica se a segunda linha é igual a terceira - Thais
                 {
-                    Console.WriteLine($"Jogador {turno} VENCEUUUUUUUU");
+                    Console.WriteLine(mensagemVitoria);
                 if (turno == "X")
                     {
                         rankingJ1++;
-                        Console.WriteLine($"Jogador {turno} agora tem {rankingJ1} vitória no ranking.");
+                        Console.WriteLine($"O jogador {turno} tem "+i+" vitorias");
                         
                     } else
                     {
                         rankingJ2++;
-                        Console.WriteLine($"Jogador {turno} agora tem {rankingJ2} vitória no ranking.");
+                        Console.WriteLine($"O jogaodor {turno} tem " + i + " vitorias");
                     }
-            }
+                    
+                        // colunas
+                        for (int j = 1; j < 3; j++)
+                    {
+                        if (tabuleiro[0, j] != "" &&
+                            tabuleiro[0, j] == tabuleiro[1,j]&&
+                            tabuleiro[1,j] == tabuleiro[2, j])
+                        {
+                            Console.WriteLine(mensagemVitoria);
+                            if (turno == "X")
+                            {
+                                rankingJ1++;
+                                Console.WriteLine($"O jogaodor {turno} tem " + i + " vitorias");
+                            }
+                            else
+                            {
+                                rankingJ2++;
+                                Console.WriteLine($"O jogaodor {turno} tem " + i + " vitorias");
+                            }
+                        }
+                    }
+                    // diagonais
+                    if (tabuleiro[0, 0] != " " &&
+                        tabuleiro[0, 0] == tabuleiro[1, 1] &&
+                        tabuleiro[1, 1] == tabuleiro[2, 2])
+                    {
+                        Console.WriteLine(mensagemVitoria);
+                        if (turno == "X")
+                        {
+                            rankingJ1++;
+                            Console.WriteLine($"O jogaodor {turno} tem " + i + " vitorias");
+                        }
+                        else
+                        {
+                            rankingJ2++;
+                            Console.WriteLine($"O jogaodor {turno} tem " + i + " vitorias");
+                        }
+                    } 
+                    if(tabuleiro[0, 2] != " " &&
+                        tabuleiro[0, 2] == tabuleiro[1, 1] &&
+                        tabuleiro[1, 1] == tabuleiro[2, 0])
+                    {
+                        Console.WriteLine(mensagemVitoria);
+                        if (turno == "X")
+                        {
+                            rankingJ1++;
+                            Console.WriteLine($"O jogaodor {turno} tem " + i + " vitorias");
+                        }
+                        else
+                        {
+                            rankingJ2++;
+                            Console.WriteLine($"O jogaodor {turno} tem " + i + " vitorias");
+                        }
+                    }
+                }
             }
         }
             contadorTurnos++;
@@ -204,7 +244,7 @@ static void JogoDaVelha()
 
 
 }
-
+// ========================================================================================================//
     static void InicieJogadorVSJogador(char[,] tabuleiro)
     {
         Console.WriteLine("|====================================|");
@@ -233,8 +273,9 @@ static void JogoDaVelha()
             }
 
     }
+// ========================================================================================================//
 
-    static void InicieJogadorVSPc()
+static void InicieJogadorVSPc()
     {
         Console.WriteLine("|=======================================|");
         Console.WriteLine("|Modo selecionado: Jogador vs computador|");
@@ -259,10 +300,11 @@ static void JogoDaVelha()
 
     }
 
-    // Ainda não estamos utilizando esses métodos, mas eles serão usados no futuro || Favor não apagar
+// Ainda não estamos utilizando esses métodos, mas eles serão usados no futuro || Favor não apagar
 
+// ========================================================================================================//
 
-    static void InicieModoFacil()
+static void InicieModoFacil()
     {
         Console.WriteLine("==Modo Fácil===");
     }

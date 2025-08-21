@@ -8,6 +8,7 @@
 //                SETOR DE COMENTÁRIOS
 
 // Já estou dando uma olhada em como fazer o ranking funcionar sem problemas, até então, favor não mexer nesse método || - marcZ
+// Precisamos colocar uma verificação para não permitir que o usuário escolha uma posição que já foi preenchida - Vou procurar isso hj de noite || - marcZ
 
 
 // ========================================================|
@@ -487,6 +488,6 @@ while (!b)
 // ========================================================|
 
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-// Boa noite Filho do Caos || - marcZ
+// Boa noite dnv Filho do Caos, salve salve pros mano da firma! || - marcZ
 
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

@@ -365,3 +365,5 @@ while (!b)
 
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 // Boa noite Filho do Caos || - marcZ
+
+//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

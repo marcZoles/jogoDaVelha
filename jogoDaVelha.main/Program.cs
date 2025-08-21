@@ -14,6 +14,8 @@
 
 // Variáveis Globais
 
+using System;
+
 Console.BackgroundColor = ConsoleColor.Gray;
 Console.ForegroundColor = ConsoleColor.Black;
 Console.Clear();
@@ -57,9 +59,9 @@ while (!b)
     {
         case 1:
 
-            InicieJogadorVSJogador(tabuleiro);
+            InicieJogadorVSJogador();
             break;
-
+          
         case 2:
 
             InicieJogadorVSPc();
@@ -76,10 +78,6 @@ while (!b)
             b = true;
             break;
 
-        case 5:
-            JogoDaVelha();
-            break;
-
         default:
 
             Console.WriteLine("Opção inválida! Tente novamente digitando um valor númerico ou uma das opções abaixo");
@@ -89,8 +87,9 @@ while (!b)
     }
 
 
-    static void JogoDaVelha()
+    static void InicieJogadorVSJogador()
     {
+        //Variaveis para a função
         string jogador1 = "X";
         string jogador2 = "O";
         int rankingJ1 = 0;
@@ -99,8 +98,14 @@ while (!b)
         string turno = "X";
         int contadorTurnos = 0;
         int mioloDoTabuleiro = 1;
-        string mensagemVitoria = $"Jogador {turno} VENCEUUUUUUUU ::))))";
+        string mensagemVitoria = "Jogador ( X ) VENCEUUUUUUUU ::))))";
+        string mensagemVitoria2 = "Jogador ( O ) VENCEUUUUUUUU ::))))";
 
+        Console.WriteLine("|=======================================|");
+        Console.WriteLine("|Modo selecionado: Jogador vs computador|");
+        Console.WriteLine("|=======================================|");
+
+        //=======================================================================//
         //for que preenche a matriz com os numeros de 1 a 9, ou seja, o miolo do tabuleiro
         for (int i = 0; i < tabuleiro.GetLength(0); i++)//get lenght (pesquisar melhor sobre isso)
         {
@@ -166,79 +171,111 @@ while (!b)
             // ta fucionando, agora é so replicar para TODAS as as possibilidades de vitoria (emoji de caveira)
             if (contadorTurnos > 3)
             {
-
-                for (int i = 1; i < 3; i++) //ele ira verificar as 3 linhas (0, 1, 2)
+                //PRIMEIRA LINHA -THAIS
+                if (tabuleiro[0, 0] == tabuleiro[0,1] && tabuleiro[0,1] == tabuleiro[0, 2])
                 {
-                    if (tabuleiro[i, 0] != "" && // Verifica se a primeira linha não está vazia - Thais
-                        tabuleiro[i, 0] == tabuleiro[i, 1] && // verifica se a primeira linha é igual a segunda - Thais
-                        tabuleiro[i, 1] == tabuleiro[i, 2]) // verifica se a segunda linha é igual a terceira - Thais
-                    {
-                        Console.WriteLine(mensagemVitoria);
+                    
                         if (turno == "X")
                         {
-                            rankingJ1++; // verificar se o ranking está correto e se não precisa fazer "return rankingJ1++" || - marcZ
-                            Console.WriteLine($"O jogador {turno} tem " + i + " vitorias");
-
+                            Console.WriteLine(mensagemVitoria);
+                            rankingJ1++;
                         }
                         else
                         {
+                            Console.WriteLine(mensagemVitoria2);
                             rankingJ2++;
-                            Console.WriteLine($"O jogaodor {turno} tem " + i + " vitorias");
                         }
-
-                        // colunas
-                        for (int j = 1; j < 3; j++)
-                        {
-                            if (tabuleiro[0, j] != "" &&
-                                tabuleiro[0, j] == tabuleiro[1, j] &&
-                                tabuleiro[1, j] == tabuleiro[2, j])
-                            {
-                                Console.WriteLine(mensagemVitoria);
-                                if (turno == "X")
-                                {
-                                    rankingJ1++;
-                                    Console.WriteLine($"O jogaodor {turno} tem " + i + " vitorias");
-                                }
-                                else
-                                {
-                                    rankingJ2++;
-                                    Console.WriteLine($"O jogaodor {turno} tem " + i + " vitorias");
-                                }
-                            }
-                        }
-                        // diagonais
-                        if (tabuleiro[0, 0] != " " &&
-                            tabuleiro[0, 0] == tabuleiro[1, 1] &&
-                            tabuleiro[1, 1] == tabuleiro[2, 2])
-                        {
-                            Console.WriteLine(mensagemVitoria);
-                            if (turno == "X")
-                            {
-                                rankingJ1++;
-                                Console.WriteLine($"O jogaodor {turno} tem " + i + " vitorias");
-                            }
-                            else
-                            {
-                                rankingJ2++;
-                                Console.WriteLine($"O jogaodor {turno} tem " + i + " vitorias");
-                            }
-                        }
-                        if (tabuleiro[0, 2] != " " &&
-                            tabuleiro[0, 2] == tabuleiro[1, 1] &&
-                            tabuleiro[1, 1] == tabuleiro[2, 0])
-                        {
-                            Console.WriteLine(mensagemVitoria);
-                            if (turno == "X")
-                            {
-                                rankingJ1++;
-                                Console.WriteLine($"O jogaodor {turno} tem " + i + " vitorias");
-                            }
-                            else
-                            {
-                                rankingJ2++;
-                                Console.WriteLine($"O jogaodor {turno} tem " + i + " vitorias");
-                            }
-                        }
+                    
+                } // SEGUNDA LINHA
+                if (tabuleiro[1, 0] == tabuleiro[1,1]&& tabuleiro[1,1] == tabuleiro[1, 2])
+                {
+                    if (turno == "X")
+                    {
+                        Console.WriteLine(mensagemVitoria);
+                        rankingJ1++;
+                    }
+                    else
+                    {
+                        Console.WriteLine(mensagemVitoria2);
+                        rankingJ2++;
+                    }
+                } // TERCEIRA LINHA
+                if (tabuleiro[2,0] == tabuleiro[2,1] && tabuleiro[2,1]== tabuleiro[2, 2])
+                {
+                    if (turno == "X")
+                    {
+                        Console.WriteLine(mensagemVitoria);
+                        rankingJ1++;
+                    }
+                    else
+                    {
+                        Console.WriteLine(mensagemVitoria2);
+                        rankingJ2++;
+                    }
+                } // PRIMEIRA COLUNA
+                if(tabuleiro[0,0] == tabuleiro[1,0]&& tabuleiro[1,0] == tabuleiro[2, 0])
+                {
+                    if (turno == "X")
+                    {
+                        Console.WriteLine(mensagemVitoria);
+                        rankingJ1++;
+                    }
+                    else
+                    {
+                        Console.WriteLine(mensagemVitoria2);
+                        rankingJ2++;
+                    }
+                } // SEGUNDA COLUNA
+                if(tabuleiro[0, 1] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 1])
+                {
+                    if (turno == "X")
+                    {
+                        Console.WriteLine(mensagemVitoria);
+                        rankingJ1++;
+                    }
+                    else
+                    {
+                        Console.WriteLine(mensagemVitoria2);
+                        rankingJ2++;
+                    }
+                } // TERCEIRA COLUNA
+                if(tabuleiro[0, 2] == tabuleiro[1, 2] && tabuleiro[1, 2] == tabuleiro[2, 2])
+                {
+                    if (turno == "X")
+                    {
+                        Console.WriteLine(mensagemVitoria);
+                        rankingJ1++;
+                    }
+                    else
+                    {
+                        Console.WriteLine(mensagemVitoria2);
+                        rankingJ2++;
+                    }
+                } // DIAGONAL ESQUERDA
+                if (tabuleiro[0, 0] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 2])
+                {
+                    if (turno == "X")
+                    {
+                        Console.WriteLine(mensagemVitoria);
+                        rankingJ1++;
+                    }
+                    else
+                    {
+                        Console.WriteLine(mensagemVitoria2);
+                        rankingJ2++;
+                    }
+                } // DIAGONAL DIREITA
+                if (tabuleiro[0, 2] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 0])
+                {
+                    if (turno == "X")
+                    {
+                        Console.WriteLine(mensagemVitoria);
+                        rankingJ1++;
+                    }
+                    else
+                    {
+                        Console.WriteLine(mensagemVitoria2);
+                        rankingJ2++;
                     }
                 }
             }
@@ -259,34 +296,7 @@ while (!b)
     // ========================================================================================================//
 
 
-    static void InicieJogadorVSJogador(char[,] tabuleiro)
-    {
-        Console.WriteLine("|====================================|");
-        Console.WriteLine("|Modo selecionado: Jogador vs Jogador|");
-        Console.WriteLine("|====================================|");
-
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
-            {
-                tabuleiro[i, j] = ' ';
-            }
-        }
-
-
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
-            {
-                Console.Write(tabuleiro[i, j]);
-                if (j < 2) Console.Write(" | ");
-            }
-            Console.WriteLine();
-            if (i < 2) Console.WriteLine("---+---+---");
-
-        }
-
-    }
+    
 
     // ========================================================================================================//
 
@@ -294,6 +304,7 @@ while (!b)
     {
         
         {
+           
             Console.Clear();
             Console.WriteLine("|=======================================|");
             Console.WriteLine("|Modo selecionado: Jogador vs computador|");
@@ -304,7 +315,6 @@ while (!b)
             string dificuldade = Console.ReadLine().ToUpper();
             { 
             
-
                 switch (dificuldade)
                 {
                     case "F":
@@ -321,32 +331,144 @@ while (!b)
             }
         }
     }
+
+    // ========================================================================================================//
+
     // Ainda não estamos utilizando esses métodos, mas eles serão usados no futuro || Favor não apagar
 
     // ========================================================================================================//
 
     static void InicieModoFacil()
     {
-        Console.WriteLine("==Modo Fácil===");
+        //variaveis para função
+        string[,] tabuleiro = new string[3, 3]; 
+        string jogador1 = "X";
+        string computador = "O";
+        int rankingJ1 = 0;
+        string turno = "X";
+        int contadorTurnos = 0;
+        int mioloDoTabuleiro = 1;
+        string mensagemVitoriaJVSC = "Jogador ( X ) VENCEUUUUUUUU ::))))";
+        string mensagemVitoriaPC = "Computador VENCEUUUUUUUU ::))))";
+        int rankingPC = 1;
+        
+        //================================================================================//
+        Console.WriteLine("|-----------------|");
+        Console.WriteLine("|===Modo Fácil====|");
+        Console.WriteLine("|-----------------|");
+
+        for (int i = 0; i < tabuleiro.GetLength(0); i++)
+        {
+            for (int j = 0; j < tabuleiro.GetLength(1); j++)
+            {
+                tabuleiro[i, j] = mioloDoTabuleiro.ToString();
+                mioloDoTabuleiro++;
+            }
+
+        }
+        
+        for (int i = 0; i < tabuleiro.GetLength(0); i++)
+        {
+            for (int j = 0; j < tabuleiro.GetLength(1); j++)
+            {
+                Console.Write(tabuleiro[i, j]);
+                if (j < 2) Console.Write("  | ");
+
+            }
+            Console.WriteLine();
+            if (i < 2) Console.WriteLine("---+----+----");
+
+        }
+        //=================================================================================// logica do jogo
+            while (contadorTurnos < 9)
+        {
+            string jogada = "";
+            if(turno == computador)
+            {
+                Console.WriteLine("|====================================|");
+                Console.WriteLine("|=========| O computador joga |======|");
+                Console.WriteLine("|====================================|");
+
+                for (int i = 0; i < 3 && jogada == ""; i++) { 
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (tabuleiro[i,j] != "X" && tabuleiro[i,j] != "O")
+                        {
+                            jogada = tabuleiro[i, j];
+                            break;
+                        }
+                    }
+                }
+
+            }
+            else
+            {
+                Console.WriteLine("|====================================|");
+                Console.WriteLine($"|========| O jogador {turno} joga |========|");
+                Console.WriteLine("|====================================|");
+                jogada = Console.ReadLine();
+            }
+            //=================================== Atualização / impressão do tabuleiro =====================//
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0;j <3; j++)
+                {
+                    if (jogada == tabuleiro[i, j])
+                    {
+                        tabuleiro[i, j] = turno;
+                    }
+                }
+            }
+            for (int i = 0; i < tabuleiro.GetLength(0); i++)
+            {
+                for (int j = 0; j < tabuleiro.GetLength(1); j++)
+                {
+                    Console.Write(tabuleiro[i, j]);
+                    if (j < 2) Console.Write("  | ");
+                }
+                Console.WriteLine();
+                if (i < 2) Console.WriteLine("---+----+----");
+            }
+            contadorTurnos++;
+            if (turno == jogador1)    //serve para controlar de quem é o turno de jogar
+            {
+                turno = computador;
+            }
+            else
+            {
+                turno = jogador1;
+            }
+        }
+
+        if (contadorTurnos > 3)
+        {
+            //implementar a lógica da vitoria -- Thais
+        }
+
     }
+
+    //=============================================================================================//
 
     static void InicieModoDificil()
     {
-        Console.WriteLine("==Modo Dificil==");
+        Console.WriteLine("|------------------|");
+        Console.WriteLine("|===Modo Dificil===|");
+        Console.WriteLine("|------------------|");
     }
-
+   //===========================================================================================================//
     static void ExibirRanking(int rankingJ1, int rankingJ2) // Já estou trabalhando neste método do ranking, favor não mexer || - marcZ
     {
         Console.WriteLine("==Ranking top10 atualizadao.com.br da silva==");
         Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
         Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
 }
-
+    //===================================================================================================//
     if (modoDeJogoConvert == 4) // Verificação para ver se o usuário escolheu sair do jogo
     {
         b = true;
+    }    
     }
-}
+
 
 
 

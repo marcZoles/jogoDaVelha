@@ -28,6 +28,7 @@ int rankingJ2 = 0;
 
 while (!b)
 {
+    Console.WriteLine("===Criado por: Gabriel Marczal, Bianca Michoski, Thais Colaço e José Guides===");
     Console.WriteLine("|=======================================================|");
     Console.WriteLine("|||||||||||||||||||---MENU PRINCIPAL---||||||||||||||||||");
     Console.WriteLine("|=======================================================|");

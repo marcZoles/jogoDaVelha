@@ -139,6 +139,8 @@ while (!b)
             Console.WriteLine("|====================================|");
             string jogada = Console.ReadLine();
 
+           
+
             // Aqui eu estou verificando se a jogada é válida, ou seja, se o jogador digitou um número de 1 a 9
             // Se for valida ele atualiza o tabuleiro
             for (int i = 0; i < tabuleiro.GetLength(0); i++)
@@ -151,8 +153,17 @@ while (!b)
                         tabuleiro[i, j] = turno;
 
                     }
-                }
+                    if (tabuleiro[i, j] == "X" || tabuleiro[i, j] == "O")
+                    {
+                        Console.WriteLine("Jogada inválida! Essa posição já está ocupada. Tente novamente.");
+                        // Aqui eu estou fazendo o jogador digitar novamente a jogada
+                        jogada = Console.ReadLine();
+                        j = -1; // Reseta o loop interno para verificar novamente a jogada
+                        
+                    
 
+                    }
+                }
             }
 
             // Aqui eu estou imprimindo o tabuleiro atualizado na tela

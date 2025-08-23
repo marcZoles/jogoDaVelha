@@ -122,14 +122,30 @@ while (!b)
         {
             for (int j = 0; j < tabuleiro.GetLength(1); j++)
             {
+                Console.BackgroundColor = ConsoleColor.Gray;
+                Console.ForegroundColor = ConsoleColor.Black;
+
                 Console.Write(tabuleiro[i, j]);
-                if (j < 2) Console.Write("  | ");
+                if (j < 2)
+                {
+                    Console.BackgroundColor = ConsoleColor.Gray;
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write("  | ");
+                }
 
             }
             Console.WriteLine();
-            if (i < 2) Console.WriteLine("---+----+----");
+            if (i < 2)
+            {
+                Console.BackgroundColor = ConsoleColor.Gray;
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("---+----+----");
+            }
 
         }
+
+        Console.BackgroundColor = ConsoleColor.Gray;
+        Console.ForegroundColor = ConsoleColor.Black;
 
         // Esse while é o que controla o jogo, ele vai rodar enquanto o contador de turnos for menor que 9, ou seja, enquanto houver jogadas possíveis
         while (contadorTurnos < 9)
@@ -186,12 +202,29 @@ while (!b)
             {
                 for (int j = 0; j < tabuleiro.GetLength(1); j++)
                 {
+
+                    Console.BackgroundColor = ConsoleColor.Gray;
+                    Console.ForegroundColor = ConsoleColor.Black;
+
                     Console.Write(tabuleiro[i, j]);
-                    if (j < 2) Console.Write("  | ");
+                    if (j < 2)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Gray;
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.Write("  | ");
+                    }
                 }
                 Console.WriteLine();
-                if (i < 2) Console.WriteLine("---+----+----");
+                if (i < 2)
+                {
+                    Console.BackgroundColor = ConsoleColor.Gray;
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("---+----+----");
+                }
             }
+
+            Console.BackgroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = ConsoleColor.Black;
 
 
             //comeco a verificar se o jogador ganhou, ou seja, se ele conseguiu fazer uma linha, coluna ou diagonal com o mesmo simbolo
@@ -212,7 +245,7 @@ while (!b)
                             Console.WriteLine(mensagemVitoria2);
                             rankingJ2++;
                         }
-                    
+                    return;
                 } // SEGUNDA LINHA
                 if (tabuleiro[1, 0] == tabuleiro[1,1]&& tabuleiro[1,1] == tabuleiro[1, 2])
                 {
@@ -226,6 +259,7 @@ while (!b)
                         Console.WriteLine(mensagemVitoria2);
                         rankingJ2++;
                     }
+                    return;
                 } // TERCEIRA LINHA
                 if (tabuleiro[2,0] == tabuleiro[2,1] && tabuleiro[2,1]== tabuleiro[2, 2])
                 {
@@ -239,6 +273,7 @@ while (!b)
                         Console.WriteLine(mensagemVitoria2);
                         rankingJ2++;
                     }
+                    return;
                 } // PRIMEIRA COLUNA
                 if(tabuleiro[0,0] == tabuleiro[1,0]&& tabuleiro[1,0] == tabuleiro[2, 0])
                 {
@@ -252,6 +287,7 @@ while (!b)
                         Console.WriteLine(mensagemVitoria2);
                         rankingJ2++;
                     }
+                    return;
                 } // SEGUNDA COLUNA
                 if(tabuleiro[0, 1] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 1])
                 {
@@ -265,6 +301,7 @@ while (!b)
                         Console.WriteLine(mensagemVitoria2);
                         rankingJ2++;
                     }
+                    return;
                 } // TERCEIRA COLUNA
                 if(tabuleiro[0, 2] == tabuleiro[1, 2] && tabuleiro[1, 2] == tabuleiro[2, 2])
                 {
@@ -278,6 +315,7 @@ while (!b)
                         Console.WriteLine(mensagemVitoria2);
                         rankingJ2++;
                     }
+                    return;
                 } // DIAGONAL ESQUERDA
                 if (tabuleiro[0, 0] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 2])
                 {
@@ -291,6 +329,7 @@ while (!b)
                         Console.WriteLine(mensagemVitoria2);
                         rankingJ2++;
                     }
+                    return;
                 } // DIAGONAL DIREITA
                 if (tabuleiro[0, 2] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 0])
                 {
@@ -304,6 +343,7 @@ while (!b)
                         Console.WriteLine(mensagemVitoria2);
                         rankingJ2++;
                     }
+                    return;
                 }
             }
             contadorTurnos++;
@@ -314,6 +354,13 @@ while (!b)
             else
             {
                 turno = "O";
+            }
+
+            if (contadorTurnos == 9)
+            {
+                Console.WriteLine("Deu velha! Ninguém ganhou dessa vez :(");
+                Console.WriteLine("Reinicie o jogo para jogar novamente");
+                return;
             }
         }
 

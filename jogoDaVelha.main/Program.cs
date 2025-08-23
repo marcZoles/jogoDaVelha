@@ -103,7 +103,7 @@ while (!b)
         string mensagemVitoria2 = "Jogador ( O ) VENCEUUUUUUUU ::))))";
 
         Console.WriteLine("|=======================================|");
-        Console.WriteLine("|Modo selecionado: Jogador vs computador|");
+        Console.WriteLine("|Modo selecionado: Jogador vs Jogador   |");
         Console.WriteLine("|=======================================|");
 
         //=======================================================================//
@@ -139,32 +139,47 @@ while (!b)
             Console.WriteLine("|====================================|");
             string jogada = Console.ReadLine();
 
-           
 
-            // Aqui eu estou verificando se a jogada é válida, ou seja, se o jogador digitou um número de 1 a 9
-            // Se for valida ele atualiza o tabuleiro
-            for (int i = 0; i < tabuleiro.GetLength(0); i++)
 
+            // Aqui eu vou verificar se a jogada é válida, ou seja, se o jogador digitou um número de 1 a 9 e se não está tentando ocupar um lugar que já está preenchido
+            // Se for valida ele vai atualizar o tabuleiro
+
+            // Variavel boleana para verificar se é verdadeiro ou falso
+            //começa no falso pois ainda não fizemos nenhuma jogada
+            bool jogadaValida = false;
+
+            // Enquanto o usuario não fizar uma jogada válida, o programa não vai sair desse while
+            while (!jogadaValida)
             {
-                for (int j = 0; j < tabuleiro.GetLength(1); j++)
+                // Verifica se a jogada é um número e se está dentro do intervalo de 1 a 9
+                if (int.TryParse(jogada, out int posicao) && posicao >= 1 && posicao <= 9)
                 {
-                    if (jogada == tabuleiro[i, j])
-                    {
-                        tabuleiro[i, j] = turno;
 
+                    // Converte a posição para índices da matriz
+                    int linha = (posicao - 1) / 3;
+                    int coluna = (posicao - 1) % 3;
+
+                    // Verifica se a posição já está sendo ocupada ocupada, e se não estiver ele atualiza o tabuleiro
+                    if (tabuleiro[linha, coluna] != "X" && tabuleiro[linha, coluna] != "O")
+                    {
+                        tabuleiro[linha, coluna] = turno; // Atualiza o tabuleiro com o símbolo do jogador
+                        jogadaValida = true; // Marca a jogada como válida
                     }
-                    if (tabuleiro[i, j] == "X" || tabuleiro[i, j] == "O")
-                    {
-                        Console.WriteLine("Jogada inválida! Essa posição já está ocupada. Tente novamente.");
-                        // Aqui eu estou fazendo o jogador digitar novamente a jogada
-                        jogada = Console.ReadLine();
-                        j = -1; // Reseta o loop interno para verificar novamente a jogada
-                        
-                    
 
+                    else
+                    {
+                        Console.WriteLine("Esta posição já está ocupada! Tente novamente.");
+                        jogada = Console.ReadLine();
                     }
                 }
+
+                else
+                {
+                    Console.WriteLine("Jogada inválida! Digite um número de 1 a 9.");
+                    jogada = Console.ReadLine();
+                }
             }
+
 
             // Aqui eu estou imprimindo o tabuleiro atualizado na tela
             for (int i = 0; i < tabuleiro.GetLength(0); i++)
@@ -500,5 +515,7 @@ while (!b)
 
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 // Boa noite dnv Filho do Caos, salve salve pros mano da firma! || - marcZ
+
+// Boa noite, aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa - Bia
 
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

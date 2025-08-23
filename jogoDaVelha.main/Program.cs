@@ -21,7 +21,7 @@ Console.BackgroundColor = ConsoleColor.Gray;
 Console.ForegroundColor = ConsoleColor.Black;
 Console.Clear();
 bool b = false;
-char[,] tabuleiro = new char[3, 3]; // a virgula [,] indica que é uma matriz e não um array
+char[,] tabuleiro = new char[3, 3];
 string jogador1 = "X";
 string jogador2 = "O";
 int rankingJ1 = 0;
@@ -97,11 +97,11 @@ while (!b)
         string turno = "X";
         int contadorTurnos = 0;
         int mioloDoTabuleiro = 1;
-        string mensagemVitoria = "Jogador ( X ) VENCEUUUUUUUU ::))))";
-        string mensagemVitoria2 = "Jogador ( O ) VENCEUUUUUUUU ::))))";
+        string mensagemVitoria = "O Jogador ( X ) Ganhou!";
+        string mensagemVitoria2 = "O Jogador ( O ) Ganhou!";
 
         Console.WriteLine("|=======================================|");
-        Console.WriteLine("|Modo selecionado: Jogador vs Jogador   |");
+        Console.WriteLine("|  Modo selecionado: Jogador vs Jogador |");
         Console.WriteLine("|=======================================|");
 
         //=======================================================================//
@@ -151,7 +151,7 @@ while (!b)
         while (contadorTurnos < 9)
         {
             Console.WriteLine("|====================================|");
-            Console.WriteLine($"|========| O jogador {turno} joga |========|");
+            Console.WriteLine($"|========| Vez do Jogador {turno} |========|");
             Console.WriteLine("|====================================|");
             string jogada = Console.ReadLine();
 
@@ -441,15 +441,15 @@ while (!b)
         string turno = "X";
         int contadorTurnos = 0;
         int mioloDoTabuleiro = 1;
-        string mensagemVitoriaJVSC = "Jogador ( X ) VENCEUUUUUUUU ::))))";
-        string mensagemVitoriaPC = "Computador VENCEUUUUUUUU ::))))";
+        string mensagemVitoriaJVSC = "O Jogador ( X ) Ganhou!";
+        string mensagemVitoriaPC = "O Computador Ganhou!";
         int rankingPC = 1;
         
         //================================================================================//
 
-        Console.WriteLine("|-----------------|");
-        Console.WriteLine("|===Modo Fácil====|");
-        Console.WriteLine("|-----------------|");
+        Console.WriteLine("|-------------------|");
+        Console.WriteLine("|=== Modo Fácil ====|");
+        Console.WriteLine("|-------------------|");
 
         for (int i = 0; i < tabuleiro.GetLength(0); i++)
         {
@@ -509,7 +509,7 @@ while (!b)
             else
             {
                 Console.WriteLine("|====================================|");
-                Console.WriteLine($"|========| O jogador {turno} joga |========|");
+                Console.WriteLine($"|========| Vez do Jogador {turno} |========|");
                 Console.WriteLine("|====================================|");
                 jogada = Console.ReadLine();
             }
@@ -563,18 +563,20 @@ while (!b)
 
     static void InicieModoDificil()
     {
-        Console.WriteLine("|------------------|");
-        Console.WriteLine("|===Modo Dificil===|");
-        Console.WriteLine("|------------------|");
+        Console.WriteLine("|--------------------|");
+        Console.WriteLine("|=== Modo Dificil ===|");
+        Console.WriteLine("|--------------------|");
     }
-   //===========================================================================================================//
+   //==============================================================================================//
     static void ExibirRanking(int rankingJ1, int rankingJ2) // Já estou trabalhando neste método do ranking, favor não mexer || - marcZ
     {
-        Console.WriteLine("==Ranking top10 atualizadao.com.br da silva==");
+        Console.WriteLine("=============== Ranking ===============");
         Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
         Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
-}
-    //===================================================================================================//
+        Console.WriteLine($"Computador: vitórias"); // Falta implementar a contagem de vitórias do computador || - marcZ
+        Console.WriteLine("=======================================");
+    }
+    //=============================================================================================//
     if (modoDeJogoConvert == 4) // Verificação para ver se o usuário escolheu sair do jogo
     {
         b = true;
@@ -598,6 +600,4 @@ while (!b)
 
 // ========================================================|
 
-// Boa noite, aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa - Bia
-
-// Salve Filho do CAOS, espero que esteja tudo bem - marcZ
+// Por favor filho do CAOS, deixe o código em paz

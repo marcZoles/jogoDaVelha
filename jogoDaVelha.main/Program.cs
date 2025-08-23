@@ -8,7 +8,7 @@
 //                SETOR DE COMENTÁRIOS
 
 // Já estou dando uma olhada em como fazer o ranking funcionar sem problemas, até então, favor não mexer nesse método || - marcZ
-// Precisamos colocar uma verificação para não permitir que o usuário escolha uma posição que já foi preenchida - Vou procurar isso hj de noite || - marcZ
+// Incluir verificação de jogada inválida (ex: letra, número fora do intervalo, casa já ocupada) no modo Jogador VS PC || - marcZ
 
 
 // ========================================================|
@@ -31,7 +31,6 @@ int rankingJ2 = 0;
 
 while (!b)
 {
-    Console.WriteLine("===Criado por: Gabriel Marczal, Bianca Michoski, Thais Colaço e José Guides===");
     Console.WriteLine("|=======================================================|");
     Console.WriteLine("|||||||||||||||||||---MENU PRINCIPAL---||||||||||||||||||");
     Console.WriteLine("|=======================================================|");
@@ -56,7 +55,7 @@ while (!b)
     Console.Clear();
 
 
-    switch (modoDeJogoConvert) // Problema do loop infinito foi corrigido pelo José & Thays, agora tá funcionando filé || - marcZ
+    switch (modoDeJogoConvert)
     {
         case 1:
 
@@ -90,7 +89,6 @@ while (!b)
 
     static void InicieJogadorVSJogador()
     {
-        //Variaveis para a função
         string jogador1 = "X";
         string jogador2 = "O";
         int rankingJ1 = 0;
@@ -108,7 +106,7 @@ while (!b)
 
         //=======================================================================//
         //for que preenche a matriz com os numeros de 1 a 9, ou seja, o miolo do tabuleiro
-        for (int i = 0; i < tabuleiro.GetLength(0); i++)//get lenght (pesquisar melhor sobre isso)
+        for (int i = 0; i < tabuleiro.GetLength(0); i++)//get lenght (pesquisar melhor sobre isso) || - José
         {
             for (int j = 0; j < tabuleiro.GetLength(1); j++)
             {
@@ -126,15 +124,17 @@ while (!b)
                 Console.ForegroundColor = ConsoleColor.Black;
 
                 Console.Write(tabuleiro[i, j]);
+
                 if (j < 2)
                 {
                     Console.BackgroundColor = ConsoleColor.Gray;
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write("  | ");
+                    Console.Write("  |  ");
                 }
 
             }
             Console.WriteLine();
+
             if (i < 2)
             {
                 Console.BackgroundColor = ConsoleColor.Gray;
@@ -156,12 +156,12 @@ while (!b)
             string jogada = Console.ReadLine();
 
 
-
+            // Comentários explicativos do que cada parte do código faz || - Bianca
             // Aqui eu vou verificar se a jogada é válida, ou seja, se o jogador digitou um número de 1 a 9 e se não está tentando ocupar um lugar que já está preenchido
             // Se for valida ele vai atualizar o tabuleiro
 
             // Variavel boleana para verificar se é verdadeiro ou falso
-            //começa no falso pois ainda não fizemos nenhuma jogada
+            // Começa no falso pois ainda não fizemos nenhuma jogada
             bool jogadaValida = false;
 
             // Enquanto o usuario não fizar uma jogada válida, o programa não vai sair desse while
@@ -207,6 +207,7 @@ while (!b)
                     Console.ForegroundColor = ConsoleColor.Black;
 
                     Console.Write(tabuleiro[i, j]);
+
                     if (j < 2)
                     {
                         Console.BackgroundColor = ConsoleColor.Gray;
@@ -215,6 +216,7 @@ while (!b)
                     }
                 }
                 Console.WriteLine();
+
                 if (i < 2)
                 {
                     Console.BackgroundColor = ConsoleColor.Gray;
@@ -232,6 +234,7 @@ while (!b)
             if (contadorTurnos > 3)
             {
                 //PRIMEIRA LINHA -THAIS
+
                 if (tabuleiro[0, 0] == tabuleiro[0,1] && tabuleiro[0,1] == tabuleiro[0, 2])
                 {
                     
@@ -247,6 +250,7 @@ while (!b)
                         }
                     return;
                 } // SEGUNDA LINHA
+
                 if (tabuleiro[1, 0] == tabuleiro[1,1]&& tabuleiro[1,1] == tabuleiro[1, 2])
                 {
                     if (turno == "X")
@@ -261,6 +265,7 @@ while (!b)
                     }
                     return;
                 } // TERCEIRA LINHA
+
                 if (tabuleiro[2,0] == tabuleiro[2,1] && tabuleiro[2,1]== tabuleiro[2, 2])
                 {
                     if (turno == "X")
@@ -275,6 +280,7 @@ while (!b)
                     }
                     return;
                 } // PRIMEIRA COLUNA
+
                 if(tabuleiro[0,0] == tabuleiro[1,0]&& tabuleiro[1,0] == tabuleiro[2, 0])
                 {
                     if (turno == "X")
@@ -289,6 +295,7 @@ while (!b)
                     }
                     return;
                 } // SEGUNDA COLUNA
+
                 if(tabuleiro[0, 1] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 1])
                 {
                     if (turno == "X")
@@ -303,6 +310,7 @@ while (!b)
                     }
                     return;
                 } // TERCEIRA COLUNA
+
                 if(tabuleiro[0, 2] == tabuleiro[1, 2] && tabuleiro[1, 2] == tabuleiro[2, 2])
                 {
                     if (turno == "X")
@@ -310,20 +318,25 @@ while (!b)
                         Console.WriteLine(mensagemVitoria);
                         rankingJ1++;
                     }
+
                     else
                     {
                         Console.WriteLine(mensagemVitoria2);
                         rankingJ2++;
                     }
                     return;
+
                 } // DIAGONAL ESQUERDA
+
                 if (tabuleiro[0, 0] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 2])
                 {
+
                     if (turno == "X")
                     {
                         Console.WriteLine(mensagemVitoria);
                         rankingJ1++;
                     }
+
                     else
                     {
                         Console.WriteLine(mensagemVitoria2);
@@ -331,6 +344,7 @@ while (!b)
                     }
                     return;
                 } // DIAGONAL DIREITA
+
                 if (tabuleiro[0, 2] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 0])
                 {
                     if (turno == "X")
@@ -338,6 +352,7 @@ while (!b)
                         Console.WriteLine(mensagemVitoria);
                         rankingJ1++;
                     }
+
                     else
                     {
                         Console.WriteLine(mensagemVitoria2);
@@ -347,10 +362,12 @@ while (!b)
                 }
             }
             contadorTurnos++;
+
             if (contadorTurnos % 2 == 0)
             {
                 turno = "X";
             }
+
             else
             {
                 turno = "O";
@@ -386,6 +403,8 @@ while (!b)
             Console.WriteLine("Selecione a dificuldade do jogo: ");
             Console.WriteLine("D - Dificil");
             Console.WriteLine("F - Facil");
+
+
             string dificuldade = Console.ReadLine().ToUpper();
             { 
             
@@ -394,9 +413,11 @@ while (!b)
                     case "F":
                         InicieModoFacil();
                         break;
+
                     case "D":
                         InicieModoDificil();
                         break;
+
                     default:
                         Console.WriteLine("Opção invalida");
                         break;
@@ -408,13 +429,11 @@ while (!b)
 
     // ========================================================================================================//
 
-    // Ainda não estamos utilizando esses métodos, mas eles serão usados no futuro || Favor não apagar
 
     // ========================================================================================================//
 
     static void InicieModoFacil()
     {
-        //variaveis para função
         string[,] tabuleiro = new string[3, 3]; 
         string jogador1 = "X";
         string computador = "O";
@@ -427,12 +446,14 @@ while (!b)
         int rankingPC = 1;
         
         //================================================================================//
+
         Console.WriteLine("|-----------------|");
         Console.WriteLine("|===Modo Fácil====|");
         Console.WriteLine("|-----------------|");
 
         for (int i = 0; i < tabuleiro.GetLength(0); i++)
         {
+
             for (int j = 0; j < tabuleiro.GetLength(1); j++)
             {
                 tabuleiro[i, j] = mioloDoTabuleiro.ToString();
@@ -443,20 +464,29 @@ while (!b)
         
         for (int i = 0; i < tabuleiro.GetLength(0); i++)
         {
+
             for (int j = 0; j < tabuleiro.GetLength(1); j++)
             {
                 Console.Write(tabuleiro[i, j]);
                 if (j < 2) Console.Write("  | ");
 
             }
+
             Console.WriteLine();
-            if (i < 2) Console.WriteLine("---+----+----");
+
+            if (i < 2)
+            { 
+                Console.WriteLine("---+----+----");
+            }
 
         }
-        //=================================================================================// logica do jogo
+        //===============================Logica do jogo======================================
+
+
             while (contadorTurnos < 9)
         {
             string jogada = "";
+
             if(turno == computador)
             {
                 Console.WriteLine("|====================================|");
@@ -475,6 +505,7 @@ while (!b)
                 }
 
             }
+
             else
             {
                 Console.WriteLine("|====================================|");
@@ -482,7 +513,9 @@ while (!b)
                 Console.WriteLine("|====================================|");
                 jogada = Console.ReadLine();
             }
+
             //=================================== Atualização / impressão do tabuleiro =====================//
+
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0;j <3; j++)
@@ -493,6 +526,7 @@ while (!b)
                     }
                 }
             }
+
             for (int i = 0; i < tabuleiro.GetLength(0); i++)
             {
                 for (int j = 0; j < tabuleiro.GetLength(1); j++)
@@ -503,15 +537,19 @@ while (!b)
                 Console.WriteLine();
                 if (i < 2) Console.WriteLine("---+----+----");
             }
+
             contadorTurnos++;
+
             if (turno == jogador1)    //serve para controlar de quem é o turno de jogar
             {
                 turno = computador;
             }
+
             else
             {
                 turno = jogador1;
             }
+
         }
 
         if (contadorTurnos > 3)
@@ -560,9 +598,6 @@ while (!b)
 
 // ========================================================|
 
-//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-// Boa noite dnv Filho do Caos, salve salve pros mano da firma! || - marcZ
-
 // Boa noite, aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa - Bia
 
-//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+// Salve Filho do CAOS, espero que esteja tudo bem - marcZ

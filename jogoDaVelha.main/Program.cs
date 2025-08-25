@@ -153,16 +153,7 @@ while (!b)
                         tabuleiro[i, j] = turno;
 
                     }
-                    if (tabuleiro[i, j] == "X" || tabuleiro[i, j] == "O")
-                    {
-                        Console.WriteLine("Jogada inválida! Essa posição já está ocupada. Tente novamente.");
-                        // Aqui eu estou fazendo o jogador digitar novamente a jogada
-                        jogada = Console.ReadLine();
-                        j = -1; // Reseta o loop interno para verificar novamente a jogada
-                        
-                    
-
-                    }
+                 
                 }
             }
 

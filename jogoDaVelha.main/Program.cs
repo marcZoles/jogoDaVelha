@@ -145,167 +145,186 @@ while (!fimDeJogo)
     {
         int rankingJ1 = 0;
         int rankingJ2 = 0;
-        string[,] tabuleiro = new string[3, 3];
-        string turno = "X";
-        int contadorTurnos = 0;
-        string mensagemVitoria = "O Jogador ( X ) Ganhou!";
-        string mensagemVitoria2 = "O Jogador ( O ) Ganhou!";
 
-        Console.WriteLine("|=======================================|");
-        Console.WriteLine("|  Modo selecionado: Jogador vs Jogador |");
-        Console.WriteLine("|=======================================|");
+        bool continuar = true;
 
-        //=======================================================================//
-        CriarTabuleiro(tabuleiro);
-     
-        ImprimirTabuleiro(tabuleiro);
-
-        while (contadorTurnos < 9)
+        do
         {
-            Console.WriteLine("|====================================|");
-            Console.Write($" Vez do Jogador {turno}: "); /* teve que tirar as barras do lado pq tva dando erro                                              * com o console.write :((( */
-            string jogada = Console.ReadLine();             
-            Console.WriteLine("|====================================|");
-            
 
+            string[,] tabuleiro = new string[3, 3];
+            string turno = "X";
+            int contadorTurnos = 0;
+            string mensagemVitoria = "O Jogador ( X ) Ganhou!";
+            string mensagemVitoria2 = "O Jogador ( O ) Ganhou!";
 
-            // Comentários explicativos do que cada parte do código faz || - Bianca
-            // Aqui eu vou verificar se a jogada é válida, ou seja, se o jogador digitou um número de 1 a 9 e se não está tentando ocupar um lugar que já está preenchido
-            // Se for valida ele vai atualizar o tabuleiro
+            Console.WriteLine("|=======================================|");
+            Console.WriteLine("|  Modo selecionado: Jogador vs Jogador |");
+            Console.WriteLine("|=======================================|");
 
-            // Variavel boleana para verificar se é verdadeiro ou falso
-            // Começa no falso pois ainda não fizemos nenhuma jogada
-            bool jogadaValida = false;
+            //=======================================================================//
 
-            // Enquanto o usuario não fizar uma jogada válida, o programa não vai sair desse while
-            while (!jogadaValida)
+            CriarTabuleiro(tabuleiro);
+
+            ImprimirTabuleiro(tabuleiro);
+
+            while (contadorTurnos < 9)
             {
-                // Verifica se a jogada é um número e se está dentro do intervalo de 1 a 9
-                if (int.TryParse(jogada, out int posicao) && posicao >= 1 && posicao <= 9)
+                Console.WriteLine("|====================================|");
+                Console.Write($" Vez do Jogador {turno}: "); /* teve que tirar as barras do lado pq tva dando erro  * com o console.write :((( */
+                string jogada = Console.ReadLine();
+                Console.WriteLine("|====================================|");
+
+
+
+                // Comentários explicativos do que cada parte do código faz || - Bianca
+                // Aqui eu vou verificar se a jogada é válida, ou seja, se o jogador digitou um número de 1 a 9 e se não está tentando ocupar um lugar que já está preenchido
+                // Se for valida ele vai atualizar o tabuleiro
+
+                // Variavel boleana para verificar se é verdadeiro ou falso
+                // Começa no falso pois ainda não fizemos nenhuma jogada
+                bool jogadaValida = false;
+
+                // Enquanto o usuario não fizar uma jogada válida, o programa não vai sair desse while
+                while (!jogadaValida)
                 {
-
-                    // Converte a posição para índices da matriz
-                    int linha = (posicao - 1) / 3;
-                    int coluna = (posicao - 1) % 3;
-
-                    // Verifica se a posição já está sendo ocupada ocupada, e se não estiver ele atualiza o tabuleiro
-                    if (tabuleiro[linha, coluna] != "X" && tabuleiro[linha, coluna] != "O")
+                    // Verifica se a jogada é um número e se está dentro do intervalo de 1 a 9
+                    if (int.TryParse(jogada, out int posicao) && posicao >= 1 && posicao <= 9)
                     {
-                        tabuleiro[linha, coluna] = turno; // Atualiza o tabuleiro com o símbolo do jogador
-                        jogadaValida = true; // Marca a jogada como válida
+
+                        // Converte a posição para índices da matriz
+                        int linha = (posicao - 1) / 3;
+                        int coluna = (posicao - 1) % 3;
+
+                        // Verifica se a posição já está sendo ocupada ocupada, e se não estiver ele atualiza o tabuleiro
+                        if (tabuleiro[linha, coluna] != "X" && tabuleiro[linha, coluna] != "O")
+                        {
+                            tabuleiro[linha, coluna] = turno; // Atualiza o tabuleiro com o símbolo do jogador
+                            jogadaValida = true; // Marca a jogada como válida
+                        }
+
+                        else
+                        {
+                            Console.WriteLine("Esta posição já está ocupada! Tente novamente.");
+                            jogada = Console.ReadLine();
+                        }
                     }
 
                     else
                     {
-                        Console.WriteLine("Esta posição já está ocupada! Tente novamente.");
+                        Console.WriteLine("Jogada inválida! Digite um número de 1 a 9.");
                         jogada = Console.ReadLine();
                     }
                 }
 
+                ImprimirTabuleiro(tabuleiro);
+
+                //comeco a verificar se o jogador ganhou, ou seja, se ele conseguiu fazer uma linha, coluna ou diagonal com o mesmo simbolo
+                // ta fucionando, agora é so replicar para TODAS as as possibilidades de vitoria (emoji de caveira)
+                if (contadorTurnos > 3)
+                {
+
+
+                    for (int i = 0; i < 3; i++) // Verifica linhas
+                    {
+                        if (tabuleiro[i, 0] == tabuleiro[i, 1] && tabuleiro[i, 1] == tabuleiro[i, 2])
+                        {
+                            if (turno == "X")
+                            {
+                                Console.WriteLine(mensagemVitoria);
+                                rankingJ1++;
+                            }
+                            else
+                            {
+                                Console.WriteLine(mensagemVitoria2);
+                                rankingJ2++;
+                            }
+                            return;
+                        }
+
+
+                    }
+
+                    for (int j = 0; j < 3; j++) // Verifica colunas
+                    {
+                        if (tabuleiro[0, j] == tabuleiro[1, j] && tabuleiro[1, j] == tabuleiro[2, j])
+                        {
+                            if (turno == "X")
+                            {
+                                Console.WriteLine(mensagemVitoria);
+                                rankingJ1++;
+                            }
+                            else
+                            {
+                                Console.WriteLine(mensagemVitoria2);
+                                rankingJ2++;
+                            }
+                            return;
+                        }
+                    }
+
+                    // Verifica se a diagonal principal está completa
+                    if (tabuleiro[0, 0] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 2])
+                    {
+                        if (turno == "X")
+                        {
+                            Console.WriteLine(mensagemVitoria);
+                            rankingJ1++;
+                        }
+                        else
+                        {
+                            Console.WriteLine(mensagemVitoria2);
+                            rankingJ2++;
+                        }
+                        return;
+                    }
+                    // Verifica se a diagonal secundária está completa
+                    if (tabuleiro[0, 2] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 0])
+                    {
+                        if (turno == "X")
+                        {
+                            Console.WriteLine(mensagemVitoria);
+                            rankingJ1++;
+                        }
+                        else
+                        {
+                            Console.WriteLine(mensagemVitoria2);
+                            rankingJ2++;
+                        }
+                        return;
+                    }
+
+                }
+                contadorTurnos++;
+
+                if (contadorTurnos % 2 == 0)
+                {
+                    turno = "X";
+                }
+
                 else
                 {
-                    Console.WriteLine("Jogada inválida! Digite um número de 1 a 9.");
-                    jogada = Console.ReadLine();
-                }
-            }
-
-            ImprimirTabuleiro(tabuleiro);
-
-            //comeco a verificar se o jogador ganhou, ou seja, se ele conseguiu fazer uma linha, coluna ou diagonal com o mesmo simbolo
-            // ta fucionando, agora é so replicar para TODAS as as possibilidades de vitoria (emoji de caveira)
-            if (contadorTurnos > 3)
-            {
-
-
-                for (int i = 0; i < 3; i++) // Verifica linhas
-                {
-                    if (tabuleiro[i, 0] == tabuleiro[i, 1] && tabuleiro[i, 1] == tabuleiro[i, 2])
-                    {
-                        if (turno == "X")
-                        {
-                            Console.WriteLine(mensagemVitoria);
-                            rankingJ1++;
-                        }
-                        else
-                        {
-                            Console.WriteLine(mensagemVitoria2);
-                            rankingJ2++;
-                        }
-                        return;
-                    }
-
-
+                    turno = "O";
                 }
 
-                for (int j = 0; j < 3; j++) // Verifica colunas
+                if (contadorTurnos == 9)
                 {
-                    if (tabuleiro[0, j] == tabuleiro[1, j] && tabuleiro[1, j] == tabuleiro[2, j])
-                    {
-                        if (turno == "X")
-                        {
-                            Console.WriteLine(mensagemVitoria);
-                            rankingJ1++;
-                        }
-                        else
-                        {
-                            Console.WriteLine(mensagemVitoria2);
-                            rankingJ2++;
-                        }
-                        return;
-                    }
-                }
-
-                // Verifica se a diagonal principal está completa
-                if (tabuleiro[0, 0] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 2])
-                {
-                    if (turno == "X")
-                    {
-                        Console.WriteLine(mensagemVitoria);
-                        rankingJ1++;
-                    }
-                    else
-                    {
-                        Console.WriteLine(mensagemVitoria2);
-                        rankingJ2++;
-                    }
+                    Console.WriteLine("Deu velha! Ninguém ganhou dessa vez :(");
+                    Console.WriteLine("Reinicie o jogo para jogar novamente");
                     return;
                 }
-                // Verifica se a diagonal secundária está completa
-                if (tabuleiro[0, 2] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 0])
-                {
-                    if (turno == "X")
-                    {
-                        Console.WriteLine(mensagemVitoria);
-                        rankingJ1++;
-                    }
-                    else
-                    {
-                        Console.WriteLine(mensagemVitoria2);
-                        rankingJ2++;
-                    }
-                    return;
-                }   
-                
-            }
-            contadorTurnos++;
-
-            if (contadorTurnos % 2 == 0)
-            {
-                turno = "X";
             }
 
-            else
+            Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
+            Console.WriteLine("1 - Sim");
+            Console.WriteLine("2 - Não, voltar ao Menu Principal");
+            string resposta = Console.ReadLine();
+
+            if (resposta != "1")
             {
-                turno = "O";
+                continuar = false;
             }
 
-            if (contadorTurnos == 9)
-            {
-                Console.WriteLine("Deu velha! Ninguém ganhou dessa vez :(");
-                Console.WriteLine("Reinicie o jogo para jogar novamente");
-                return;
-            }
-        }
+        } while (continuar);
 
 
     }
@@ -314,9 +333,11 @@ while (!fimDeJogo)
     // ========================================================================================================//
     static void InicieJogadorVSPc()
     {
-        
+
+        bool continuar = true;
+
+        do
         {
-           
             Console.Clear();
             Console.WriteLine("|=======================================|");
             Console.WriteLine("|Modo selecionado: Jogador vs computador|");
@@ -327,8 +348,8 @@ while (!fimDeJogo)
 
 
             string dificuldade = Console.ReadLine().ToUpper();
-            { 
-            
+            {
+
                 switch (dificuldade)
                 {
                     case "F":
@@ -343,9 +364,21 @@ while (!fimDeJogo)
                         Console.WriteLine("Opção invalida");
                         break;
                 }
-                
+
+            }
+
+            Console.WriteLine("Deseja jogar novamente no modo Jogador vs Computador?");
+            Console.WriteLine("1 - Sim");
+            Console.WriteLine("2 - Não, voltar ao Menu Principal");
+            string resposta = Console.ReadLine();
+
+            if (resposta != "1")
+            {
+                continuar = false;
             }
         }
+
+        while (continuar); // Verifica se o usuário quer continuar jogando no modo Jogador vs Computador
     }
 
     // ========================================================================================================//
@@ -532,11 +565,13 @@ while (!fimDeJogo)
         Console.WriteLine("=============== Ranking ===============");
         Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
         Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
-        Console.WriteLine($"Computador: vitórias"); // Falta implementar a contagem de vitórias do computador || - marcZ
+        Console.WriteLine("=======================================");
+        Console.WriteLine($"Jogador (X):  vitórias");
+        Console.WriteLine($"Computador (O):  vitórias");
         Console.WriteLine("=======================================");
     }
     //=============================================================================================//
-    if (modoDeJogoConvert == 4) // Verificação para ver se o usuário escolheu sair do jogo
+    if (modoDeJogoConvert == 4)
     {
         fimDeJogo = true;
     }    

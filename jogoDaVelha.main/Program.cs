@@ -105,6 +105,14 @@ while (!fimDeJogo)
             {
                 Console.BackgroundColor = ConsoleColor.Gray;
                 Console.ForegroundColor = ConsoleColor.Black;
+            if (tabuleiro[i, j] == "X")
+                {
+                    Console.BackgroundColor = ConsoleColor.Gray;
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                }else if (tabuleiro[i,j] == "O")
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
 
                 Console.Write(tabuleiro[i, j]);
 
@@ -155,9 +163,10 @@ while (!fimDeJogo)
         while (contadorTurnos < 9)
         {
             Console.WriteLine("|====================================|");
-            Console.WriteLine($"|========| Vez do Jogador {turno} |========|");
+            Console.Write($" Vez do Jogador {turno}: "); /* teve que tirar as barras do lado pq tva dando erro                                              * com o console.write :((( */
+            string jogada = Console.ReadLine();             
             Console.WriteLine("|====================================|");
-            string jogada = Console.ReadLine();
+            
 
 
             // Comentários explicativos do que cada parte do código faz || - Bianca
@@ -394,9 +403,10 @@ while (!fimDeJogo)
             else
             {
                 Console.WriteLine("|====================================|");
-                Console.WriteLine($"|========| Vez do Jogador {turno} |========|");
-                Console.WriteLine("|====================================|");
+                Console.Write($" Vez do Jogador {turno}: ");
                 jogada = Console.ReadLine();
+                Console.WriteLine("|====================================|");
+               
             }
 
             //=================================== Atualização / impressão do tabuleiro =====================//

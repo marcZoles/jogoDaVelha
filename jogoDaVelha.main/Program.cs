@@ -63,7 +63,7 @@ while (!fimDeJogo)
     switch (modoDeJogoConvert)
     {
         case 1:
-            InicieJogadorVSJogador();
+            InicieJogadorVSJogador(ref rankingJ1, ref rankingJ2);
             break;
 
         case 2:
@@ -153,10 +153,10 @@ while (!fimDeJogo)
 
 
 
-    static void InicieJogadorVSJogador()
+    static void InicieJogadorVSJogador(ref int rankingJ1, ref int rankingJ2)
     {
-        int rankingJ1 = 0;
-        int rankingJ2 = 0;
+        //int rankingJ1 = 0;
+        //int rankingJ2 = 0;
 
         bool continuar = true;
 
@@ -252,7 +252,7 @@ while (!fimDeJogo)
                                 if (resposta == "1")
                                 {
                                     Console.Clear();
-                                    InicieJogadorVSJogador();
+                                    InicieJogadorVSJogador(ref rankingJ1, ref rankingJ2);
 
                                 }
                             }
@@ -269,7 +269,7 @@ while (!fimDeJogo)
 
                                 if (resposta == "1")
                                 {
-                                    InicieJogadorVSJogador();
+                                    InicieJogadorVSJogador(ref rankingJ1, ref rankingJ2);
 
                                 }
                             }
@@ -295,7 +295,7 @@ while (!fimDeJogo)
 
                                 if (resposta == "1")
                                 {
-                                    InicieJogadorVSJogador();
+                                    InicieJogadorVSJogador(ref rankingJ1, ref rankingJ2);
                                 }
                             }
 
@@ -311,7 +311,7 @@ while (!fimDeJogo)
 
                                 if (resposta == "1")
                                 {
-                                    InicieJogadorVSJogador();
+                                    InicieJogadorVSJogador(ref rankingJ1, ref rankingJ2);
                                 }
                             }
 
@@ -334,7 +334,7 @@ while (!fimDeJogo)
 
                             if (resposta == "1")
                             {
-                                InicieJogadorVSJogador();
+                                InicieJogadorVSJogador(ref rankingJ1, ref rankingJ2);
                             }
                         }
 
@@ -350,7 +350,7 @@ while (!fimDeJogo)
 
                             if (resposta == "1")
                             {
-                                InicieJogadorVSJogador();
+                                InicieJogadorVSJogador(ref rankingJ1, ref rankingJ2);
                             }
                         }
 
@@ -371,7 +371,7 @@ while (!fimDeJogo)
 
                             if (resposta == "1")
                             {
-                                InicieJogadorVSJogador();
+                                InicieJogadorVSJogador(ref rankingJ1, ref rankingJ2);
                             }
                         }
 
@@ -387,7 +387,7 @@ while (!fimDeJogo)
 
                             if (resposta != "1")
                             {
-                                InicieJogadorVSJogador();
+                                InicieJogadorVSJogador(ref rankingJ1, ref rankingJ2);
                             }
 
                         }
@@ -486,7 +486,7 @@ while (!fimDeJogo)
         string[,] tabuleiro = new string[3, 3];
         string jogador1 = "X";
         string computador = "O";
-        int rankingJ1 = 0;
+        int rankingJvP = 0;
         int rankingPC = 0;
         string turno = "X";
         int contadorTurnos = 0;
@@ -515,19 +515,18 @@ while (!fimDeJogo)
                 Console.WriteLine("|====================================================|");
                 Console.WriteLine("|=========|        O computador joga       |=========|");
                 Console.WriteLine("|====================================================|");
+                Console.Write("O computador está pensando"); // Imprimindo mensagem de pensamento do PC
+                Console.Write(".");
+                Thread.Sleep(1000);
+                Console.Write(".");
+                Thread.Sleep(1000);
+                Console.Write(".");
+                Thread.Sleep(2000);
 
                 for (int i = 0; i < 3 && jogada == ""; i++)
-                {
+                {                    
                     for (int j = 0; j < 3; j++)
-                    {
-                        Console.WriteLine("O computador está pensando");
-                        Console.Write(".");
-                        Thread.Sleep(1000);
-                        Console.Write(".");
-                        Thread.Sleep(1000);
-                        Console.Write(".");
-                        Thread.Sleep(2000);
-
+                    {                        
                         if (tabuleiro[i, j] != "X" && tabuleiro[i, j] != "O")
                         {
                             jogada = tabuleiro[i, j];
@@ -584,7 +583,7 @@ while (!fimDeJogo)
                         if (turno == "X")
                         {
                             Console.WriteLine(mensagemVitoria);
-                            rankingJ1++;
+                            rankingJvP++;
                         }
 
                         else
@@ -604,7 +603,7 @@ while (!fimDeJogo)
                         if (turno == "X")
                         {
                             Console.WriteLine(mensagemVitoria);
-                            rankingJ1++;
+                            rankingJvP++;
                         }
 
                         else
@@ -622,7 +621,7 @@ while (!fimDeJogo)
                     if (turno == "X")
                     {
                         Console.WriteLine(mensagemVitoria);
-                        rankingJ1++;
+                        rankingJvP++;
                     }
 
                     else
@@ -639,7 +638,7 @@ while (!fimDeJogo)
                     if (turno == "X")
                     {
                         Console.WriteLine(mensagemVitoria);
-                        rankingJ1++;
+                        rankingJvP++;
                     }
 
                     else

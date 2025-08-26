@@ -18,11 +18,13 @@
 Console.BackgroundColor = ConsoleColor.Gray;
 Console.ForegroundColor = ConsoleColor.Black;
 Console.Clear();
+
 bool fimDeJogo = false;
 string[,] tabuleiro = new string[3, 3];
 int rankingJ1 = 0;
 int rankingJ2 = 0;
-
+int rankingPC = 0;
+int rankingJvP = 0;
 string centralizar = "centralizar"; //string para servir de exemplo de centralização
 int larguraConsole = Console.WindowWidth;// faz a contagem da largura do console, ou seja, quantos caracteres cabem na tela do console
 int espacosNecessarios = (larguraConsole - centralizar.Length) / 2; // calcula quantos espaços são necessários para centralizar a string "centralizar" na tela do console
@@ -48,12 +50,14 @@ while (!fimDeJogo)
 
     string modoDeJogo = Console.ReadLine();
     int modoDeJogoConvert;
+
     if (!int.TryParse(modoDeJogo, out modoDeJogoConvert))
     {
-         /* Esse if está em branco pois ele serve apenas para fazer a verificação se o usuário digitou um NUMERO
-          * pq ele vai executar o código que está no switch, entao nao precisa de uma mensagem de erro
-          */
-    }                                         
+        /* Esse if está em branco pois ele serve apenas para fazer a verificação se o usuário digitou um NUMERO
+         * pq ele vai executar o código que está no switch, entao nao precisa de uma mensagem de erro
+         */
+    }
+
     Console.Clear();
 
     switch (modoDeJogoConvert)
@@ -61,7 +65,7 @@ while (!fimDeJogo)
         case 1:
             InicieJogadorVSJogador();
             break;
-          
+
         case 2:
             InicieJogadorVSPc();
             break;
@@ -83,9 +87,11 @@ while (!fimDeJogo)
                        * consiga digitar outra opção válida
                       */
     }
+
     static void CriarTabuleiro(string[,] tabuleiro)
     {
         int mioloDoTabuleiro = 1;
+
         for (int i = 0; i < tabuleiro.GetLength(0); i++)
         {
             for (int j = 0; j < tabuleiro.GetLength(1); j++)
@@ -100,20 +106,21 @@ while (!fimDeJogo)
     static void ImprimirTabuleiro(string[,] tabuleiro)
     {
         Console.Clear();
-        for (int i = 0; i < tabuleiro.GetLength(0); i++)//Pesquisar melhor sobre GetLength,
-        {                                                //para entender melhor como funciona
+
+        for (int i = 0; i < tabuleiro.GetLength(0); i++)
+        {
             for (int j = 0; j < tabuleiro.GetLength(1); j++)
             {
                 Console.BackgroundColor = ConsoleColor.Gray;
                 Console.ForegroundColor = ConsoleColor.Black;
 
-            if (tabuleiro[i, j] == "X")
+                if (tabuleiro[i, j] == "X")
                 {
                     Console.BackgroundColor = ConsoleColor.Gray;
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
                 }
-                
-                else if (tabuleiro[i,j] == "O")
+
+                else if (tabuleiro[i, j] == "O")
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
@@ -128,13 +135,14 @@ while (!fimDeJogo)
 
                 }
             }
+
             Console.WriteLine();
 
             if (i < 2)
             {
                 Console.BackgroundColor = ConsoleColor.Gray;
                 Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine("---+----+----"); 
+                Console.WriteLine("---+----+----");
             }
         }
 
@@ -142,7 +150,7 @@ while (!fimDeJogo)
         Console.ForegroundColor = ConsoleColor.Black;
     }
 
-    
+
 
 
     static void InicieJogadorVSJogador()
@@ -174,7 +182,7 @@ while (!fimDeJogo)
             while (contadorTurnos < 9)
             {
                 Console.WriteLine("|====================================|");
-                Console.Write($" Vez do Jogador {turno}: "); /* teve que tirar as barras do lado pq tva dando erro  * com o console.write :((( */
+                Console.Write($" Vez do Jogador {turno}: ");
                 string jogada = Console.ReadLine();
                 Console.WriteLine("|====================================|");
 
@@ -227,7 +235,6 @@ while (!fimDeJogo)
                 if (contadorTurnos > 3)
                 {
 
-
                     for (int i = 0; i < 3; i++) // Verifica linhas
                     {
                         if (tabuleiro[i, 0] == tabuleiro[i, 1] && tabuleiro[i, 1] == tabuleiro[i, 2])
@@ -236,6 +243,7 @@ while (!fimDeJogo)
                             {
                                 Console.WriteLine(mensagemVitoria);
                                 rankingJ1++;
+
                                 Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
                                 Console.WriteLine("1 - Sim");
                                 Console.WriteLine("2 - Não, voltar ao Menu Principal");
@@ -248,24 +256,26 @@ while (!fimDeJogo)
 
                                 }
                             }
+
                             else
                             {
                                 Console.WriteLine(mensagemVitoria2);
                                 rankingJ2++;
+
                                 Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
                                 Console.WriteLine("1 - Sim");
                                 Console.WriteLine("2 - Não, voltar ao Menu Principal");
                                 string resposta = Console.ReadLine();
+
                                 if (resposta == "1")
                                 {
                                     InicieJogadorVSJogador();
-                                    
+
                                 }
                             }
-                            
                             return;
                         }
-                        
+
 
                     }
 
@@ -277,30 +287,35 @@ while (!fimDeJogo)
                             {
                                 Console.WriteLine(mensagemVitoria);
                                 rankingJ1++;
+
                                 Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
                                 Console.WriteLine("1 - Sim");
                                 Console.WriteLine("2 - Não, voltar ao Menu Principal");
                                 string resposta = Console.ReadLine();
+
                                 if (resposta == "1")
                                 {
                                     InicieJogadorVSJogador();
                                 }
                             }
+
                             else
                             {
                                 Console.WriteLine(mensagemVitoria2);
                                 rankingJ2++;
+
                                 Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
                                 Console.WriteLine("1 - Sim");
                                 Console.WriteLine("2 - Não, voltar ao Menu Principal");
                                 string resposta = Console.ReadLine();
+
                                 if (resposta == "1")
                                 {
                                     InicieJogadorVSJogador();
                                 }
                             }
-                            return; 
-                            
+
+                            return;
                         }
                     }
 
@@ -311,30 +326,35 @@ while (!fimDeJogo)
                         {
                             Console.WriteLine(mensagemVitoria);
                             rankingJ1++;
+
                             Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
                             Console.WriteLine("1 - Sim");
                             Console.WriteLine("2 - Não, voltar ao Menu Principal");
                             string resposta = Console.ReadLine();
+
                             if (resposta == "1")
                             {
                                 InicieJogadorVSJogador();
                             }
                         }
+
                         else
                         {
                             Console.WriteLine(mensagemVitoria2);
                             rankingJ2++;
+
                             Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
                             Console.WriteLine("1 - Sim");
                             Console.WriteLine("2 - Não, voltar ao Menu Principal");
                             string resposta = Console.ReadLine();
+
                             if (resposta == "1")
                             {
                                 InicieJogadorVSJogador();
                             }
                         }
+
                         return;
-                        
                     }
                     // Verifica se a diagonal secundária está completa
                     if (tabuleiro[0, 2] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 0])
@@ -343,37 +363,39 @@ while (!fimDeJogo)
                         {
                             Console.WriteLine(mensagemVitoria);
                             rankingJ1++;
+
                             Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
                             Console.WriteLine("1 - Sim");
                             Console.WriteLine("2 - Não, voltar ao Menu Principal");
                             string resposta = Console.ReadLine();
+
                             if (resposta == "1")
                             {
                                 InicieJogadorVSJogador();
                             }
                         }
+
                         else
                         {
                             Console.WriteLine(mensagemVitoria2);
                             rankingJ2++;
+
                             Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
                             Console.WriteLine("1 - Sim");
                             Console.WriteLine("2 - Não, voltar ao Menu Principal");
                             string resposta = Console.ReadLine();
+
                             if (resposta != "1")
                             {
                                 InicieJogadorVSJogador();
                             }
 
                         }
+
                         return;
-                       
                     }
-                    
-
-                    
-
                 }
+
                 contadorTurnos++;
 
                 if (contadorTurnos % 2 == 0)
@@ -385,16 +407,16 @@ while (!fimDeJogo)
                 {
                     turno = "O";
                 }
-                
+
                 if (contadorTurnos == 9)
                 {
                     Console.WriteLine("Deu velha! Ninguém ganhou dessa vez :(");
                     Console.WriteLine("Reinicie o jogo para jogar novamente");
-                
                 }
-               
-                
-            } 
+
+
+            }
+            // Avaliar possibilidade de incrementar esta parte na situação onde o jogo deu velha
             /*
             Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
             Console.WriteLine("1 - Sim");
@@ -407,12 +429,10 @@ while (!fimDeJogo)
             }
             */
         } while (continuar);
-
-
     }
 
     // ========================================================================================================//
-    // ========================================================================================================//
+
     static void InicieJogadorVSPc()
     {
 
@@ -430,8 +450,7 @@ while (!fimDeJogo)
 
 
             string dificuldade = Console.ReadLine().ToUpper();
-            {
-
+            { // Precisa dessas chaves para o switch funcionar corretamente?
                 switch (dificuldade)
                 {
                     case "F":
@@ -446,7 +465,6 @@ while (!fimDeJogo)
                         Console.WriteLine("Opção invalida");
                         break;
                 }
-
             }
 
             Console.WriteLine("Deseja jogar novamente no modo Jogador vs Computador?");
@@ -458,27 +476,22 @@ while (!fimDeJogo)
             {
                 continuar = false;
             }
-        }
-
-        while (continuar); // Verifica se o usuário quer continuar jogando no modo Jogador vs Computador
+        } while (continuar);
     }
-
-    // ========================================================================================================//
-
 
     // ========================================================================================================//
 
     static void InicieModoFacil()
     {
-        string[,] tabuleiro = new string[3, 3]; 
+        string[,] tabuleiro = new string[3, 3];
         string jogador1 = "X";
         string computador = "O";
         int rankingJ1 = 0;
+        int rankingPC = 0;
         string turno = "X";
         int contadorTurnos = 0;
-        int rankingPC = 1;
         string mensagemVitoria = "O Jogador ( X ) Ganhou!";
-        string mensagemVitoria2 = "O Jogador ( O ) Ganhou!";
+        string mensagemVitoria2 = "O Computador ( O ) Ganhou!";
 
         //================================================================================//
 
@@ -489,32 +502,32 @@ while (!fimDeJogo)
         CriarTabuleiro(tabuleiro);
 
         ImprimirTabuleiro(tabuleiro);
-        //===============================Logica do jogo======================================
+
+        //=============================== Logica do jogo =================================//
 
 
         while (contadorTurnos < 9)
         {
             string jogada = "";
 
-            if(turno == computador)
+            if (turno == computador)
             {
                 Console.WriteLine("|====================================================|");
-                Console.WriteLine("|=========| O computador joga (Pensando.....) |======|");
+                Console.WriteLine("|=========|        O computador joga       |=========|");
                 Console.WriteLine("|====================================================|");
 
-                for (int i = 0; i < 3 && jogada == ""; i++) {// o computador joga muito rapido e nao da pra ver ele jogando
+                for (int i = 0; i < 3 && jogada == ""; i++)
+                {
                     for (int j = 0; j < 3; j++)
-                        
                     {
                         Thread.Sleep(3000);
-                        if (tabuleiro[i,j] != "X" && tabuleiro[i,j] != "O")
+                        if (tabuleiro[i, j] != "X" && tabuleiro[i, j] != "O")
                         {
                             jogada = tabuleiro[i, j];
                             break;
                         }
                     }
                 }
-
             }
 
             else
@@ -523,14 +536,13 @@ while (!fimDeJogo)
                 Console.Write($" Vez do Jogador {turno}: ");
                 jogada = Console.ReadLine();
                 Console.WriteLine("|====================================|");
-               
             }
 
             //=================================== Atualização / impressão do tabuleiro =====================//
 
             for (int i = 0; i < 3; i++)
             {
-                for (int j = 0;j <3; j++)
+                for (int j = 0; j < 3; j++)
                 {
                     if (jogada == tabuleiro[i, j])
                     {
@@ -552,15 +564,12 @@ while (!fimDeJogo)
             {
                 turno = jogador1;
             }
-
         }
 
         if (contadorTurnos > 3)
         {
             if (contadorTurnos > 3)
             {
-
-
                 for (int i = 0; i < 3; i++) // Verifica linhas
                 {
                     if (tabuleiro[i, 0] == tabuleiro[i, 1] && tabuleiro[i, 1] == tabuleiro[i, 2])
@@ -570,15 +579,15 @@ while (!fimDeJogo)
                             Console.WriteLine(mensagemVitoria);
                             rankingJ1++;
                         }
+
                         else
                         {
                             Console.WriteLine(mensagemVitoria2);
                             rankingPC++;
                         }
+
                         return;
                     }
-
-
                 }
 
                 for (int j = 0; j < 3; j++) // Verifica colunas
@@ -590,6 +599,7 @@ while (!fimDeJogo)
                             Console.WriteLine(mensagemVitoria);
                             rankingJ1++;
                         }
+
                         else
                         {
                             Console.WriteLine(mensagemVitoria2);
@@ -607,6 +617,7 @@ while (!fimDeJogo)
                         Console.WriteLine(mensagemVitoria);
                         rankingJ1++;
                     }
+
                     else
                     {
                         Console.WriteLine(mensagemVitoria2);
@@ -614,6 +625,7 @@ while (!fimDeJogo)
                     }
                     return;
                 }
+
                 // Verifica se a diagonal secundária está completa
                 if (tabuleiro[0, 2] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 0])
                 {
@@ -622,17 +634,17 @@ while (!fimDeJogo)
                         Console.WriteLine(mensagemVitoria);
                         rankingJ1++;
                     }
+
                     else
                     {
                         Console.WriteLine(mensagemVitoria2);
                         rankingPC++;
                     }
+
                     return;
                 }
-
             }
         }
-
     }
 
     //=============================================================================================//
@@ -643,29 +655,33 @@ while (!fimDeJogo)
         Console.WriteLine("|=== Modo Dificil ===|");
         Console.WriteLine("|--------------------|");
     }
-   //==============================================================================================//
-    static void ExibirRanking(int rankingJ1, int rankingJ2) // Já estou trabalhando neste método do ranking, favor não mexer || - marcZ
+
+    //==============================================================================================//
+
+    static void ExibirRanking(int rankingJ1, int rankingJ2, int rankingJvP, int rankingPC) // Já estou trabalhando neste método do ranking, favor não mexer || - marcZ
     {
         Console.WriteLine("=============== Ranking ===============");
         Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
         Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
         Console.WriteLine("=======================================");
-        Console.WriteLine($"Jogador (X):  vitórias");
-        Console.WriteLine($"Computador (O):  vitórias");
+        Console.WriteLine($"Jogador (X): {rankingJvP} vitórias");
+        Console.WriteLine($"Computador (O): {rankingPC} vitórias");
         Console.WriteLine("=======================================");
     }
+
     //=============================================================================================//
+
     if (modoDeJogoConvert == 4)
     {
         fimDeJogo = true;
-    }    
     }
-
+} // Fim do while principal
 
 
 
 
 // ========================================================|
+
 // Setor do nosso querido amigo, o Filho do CAOS
 
 // Filho do CAOS que acabou com nossa felicidade
@@ -678,4 +694,4 @@ while (!fimDeJogo)
 
 // ========================================================|
 
-// Por favor filho do CAOS, deixe o código em paz
+// Boa noite por hoje filho do caos, amanhã a gente se vê || - marcZ

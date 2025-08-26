@@ -71,7 +71,7 @@ while (!fimDeJogo)
             break;
 
         case 3:
-            ExibirRanking(rankingJ1, rankingJ2);
+            ExibirRanking(rankingJ1, rankingJ2, rankingJvP, rankingPC);
             break;
 
         case 4:
@@ -520,7 +520,14 @@ while (!fimDeJogo)
                 {
                     for (int j = 0; j < 3; j++)
                     {
-                        Thread.Sleep(3000);
+                        Console.WriteLine("O computador está pensando");
+                        Console.Write(".");
+                        Thread.Sleep(1000);
+                        Console.Write(".");
+                        Thread.Sleep(1000);
+                        Console.Write(".");
+                        Thread.Sleep(2000);
+
                         if (tabuleiro[i, j] != "X" && tabuleiro[i, j] != "O")
                         {
                             jogada = tabuleiro[i, j];

@@ -7,8 +7,9 @@
 
 //                SETOR DE COMENTÁRIOS
 
-// Já estou dando uma olhada em como fazer o ranking funcionar sem problemas, até então, favor não mexer nesse método || - marcZ
-// Incluir verificação de jogada inválida (ex: letra, número fora do intervalo, casa já ocupada) no modo Jogador VS PC || - marcZ
+// Criar uma função para fazer a verificação das combinações vencedoras (linhas, colunas e diagonais)
+// E em seguida adicionar esta função na lógica do jogo (tanto no modo Jogador VS Jogador quanto no modo Jogador VS PC)
+// Por fim, incluir verificação de jogada inválida (ex: letra, número fora do intervalo, casa já ocupada) no modo Jogador VS PC || - marcZ
 
 
 // ========================================================|
@@ -25,10 +26,10 @@ int rankingJ1 = 0;
 int rankingJ2 = 0;
 int rankingPC = 0;
 int rankingJvP = 0;
-string centralizar = "centralizar"; //string para servir de exemplo de centralização
-int larguraConsole = Console.WindowWidth;// faz a contagem da largura do console, ou seja, quantos caracteres cabem na tela do console
-int espacosNecessarios = (larguraConsole - centralizar.Length) / 2; // calcula quantos espaços são necessários para centralizar a string "centralizar" na tela do console
-string posicionar = new string(' ', espacosNecessarios);// cria uma string com os espaços necessários para centralizar a string "centralizar" na tela do console
+string centralizar = "centralizar";
+int larguraConsole = Console.WindowWidth;
+int espacosNecessarios = (larguraConsole - centralizar.Length) / 2;
+string posicionar = new string(' ', espacosNecessarios);
 
 // ========================================================|
 
@@ -71,8 +72,7 @@ while (!fimDeJogo)
             break;
 
         case 3:
-            Console.Write(rankingJ1);
-            ExibirRanking(1, 2, rankingJvP, rankingPC);
+            ExibirRanking(1, 2, rankingJvP, rankingPC); // Se tirar estes números 1 e 2 dá BO no código, já estou verificando como corrigir || - marcZ
             break;
 
         case 4:
@@ -154,11 +154,8 @@ while (!fimDeJogo)
 
 
 
-    void InicieJogadorVSJogador()
+    void InicieJogadorVSJogador() // Não alterar para "static void..." ISSO DESTRÓI O RANKING || - marcZ
     {
-        //int rankingJ1 = 0;
-        //int rankingJ2 = 0;
-
         bool continuar = true;
 
         do
@@ -187,32 +184,19 @@ while (!fimDeJogo)
                 string jogada = Console.ReadLine();
                 Console.WriteLine("|====================================|");
 
-
-
-                // Comentários explicativos do que cada parte do código faz || - Bianca
-                // Aqui eu vou verificar se a jogada é válida, ou seja, se o jogador digitou um número de 1 a 9 e se não está tentando ocupar um lugar que já está preenchido
-                // Se for valida ele vai atualizar o tabuleiro
-
-                // Variavel boleana para verificar se é verdadeiro ou falso
-                // Começa no falso pois ainda não fizemos nenhuma jogada
                 bool jogadaValida = false;
 
-                // Enquanto o usuario não fizar uma jogada válida, o programa não vai sair desse while
                 while (!jogadaValida)
                 {
-                    // Verifica se a jogada é um número e se está dentro do intervalo de 1 a 9
                     if (int.TryParse(jogada, out int posicao) && posicao >= 1 && posicao <= 9)
                     {
-
-                        // Converte a posição para índices da matriz
                         int linha = (posicao - 1) / 3;
                         int coluna = (posicao - 1) % 3;
 
-                        // Verifica se a posição já está sendo ocupada ocupada, e se não estiver ele atualiza o tabuleiro
                         if (tabuleiro[linha, coluna] != "X" && tabuleiro[linha, coluna] != "O")
                         {
-                            tabuleiro[linha, coluna] = turno; // Atualiza o tabuleiro com o símbolo do jogador
-                            jogadaValida = true; // Marca a jogada como válida
+                            tabuleiro[linha, coluna] = turno;
+                            jogadaValida = true;
                         }
 
                         else
@@ -231,12 +215,10 @@ while (!fimDeJogo)
 
                 ImprimirTabuleiro(tabuleiro);
 
-                //comeco a verificar se o jogador ganhou, ou seja, se ele conseguiu fazer uma linha, coluna ou diagonal com o mesmo simbolo
-                // ta fucionando, agora é so replicar para TODAS as as possibilidades de vitoria (emoji de caveira)
                 if (contadorTurnos > 3)
                 {
 
-                    for (int i = 0; i < 3; i++) // Verifica linhas
+                    for (int i = 0; i < 3; i++)
                     {
                         if (tabuleiro[i, 0] == tabuleiro[i, 1] && tabuleiro[i, 1] == tabuleiro[i, 2])
                         {
@@ -292,7 +274,7 @@ while (!fimDeJogo)
 
                     }
 
-                    for (int j = 0; j < 3; j++) // Verifica colunas
+                    for (int j = 0; j < 3; j++)
                     {
                         if (tabuleiro[0, j] == tabuleiro[1, j] && tabuleiro[1, j] == tabuleiro[2, j])
                         {
@@ -344,7 +326,6 @@ while (!fimDeJogo)
                         }
                     }
 
-                    // Verifica se a diagonal principal está completa
                     if (tabuleiro[0, 0] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 2])
                     {
                         if (turno == "X")
@@ -393,7 +374,7 @@ while (!fimDeJogo)
 
                         return;
                     }
-                    // Verifica se a diagonal secundária está completa
+
                     if (tabuleiro[0, 2] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 0])
                     {
                         if (turno == "X")
@@ -460,23 +441,18 @@ while (!fimDeJogo)
                 if (contadorTurnos == 9)
                 {
                     Console.WriteLine("Deu velha! Ninguém ganhou dessa vez :(");
-                    Console.WriteLine("Reinicie o jogo para jogar novamente");
+                    Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
+                    Console.WriteLine("1 - Sim");
+                    Console.WriteLine("2 - Não, voltar ao Menu Principal");
+                    string resposta = Console.ReadLine();
+
+                    if (resposta != "1")
+                    {
+                        continuar = false;
+                    }
                 }
+            }           
 
-
-            }
-            // Avaliar possibilidade de incrementar esta parte na situação onde o jogo deu velha
-            /*
-            Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
-            Console.WriteLine("1 - Sim");
-            Console.WriteLine("2 - Não, voltar ao Menu Principal");
-            string resposta = Console.ReadLine();
-
-            if (resposta != "1")
-            {
-                continuar = false;
-            }
-            */
         } while (continuar);
     }
 
@@ -499,7 +475,7 @@ while (!fimDeJogo)
 
 
             string dificuldade = Console.ReadLine().ToUpper();
-            { // Precisa dessas chaves para o switch funcionar corretamente?
+            { // Precisa dessas chaves para o switch funcionar corretamente? || - marcZ
                 switch (dificuldade)
                 {
                     case "F":
@@ -564,7 +540,7 @@ while (!fimDeJogo)
                 Console.WriteLine("|====================================================|");
                 Console.WriteLine("|=========|        O computador joga       |=========|");
                 Console.WriteLine("|====================================================|");
-                Console.Write("O computador está pensando"); // Imprimindo mensagem de pensamento do PC
+                Console.Write("O computador está pensando");
                 Console.Write(".");
                 Thread.Sleep(1000);
                 Console.Write(".");
@@ -610,7 +586,7 @@ while (!fimDeJogo)
 
             contadorTurnos++;
 
-            if (turno == jogador1)    //serve para controlar de quem é o turno de jogar
+            if (turno == jogador1) // Controle de turnos
             {
                 turno = computador;
             }
@@ -713,7 +689,7 @@ while (!fimDeJogo)
 
     //==============================================================================================//
 
-    void ExibirRanking(int rankingJ1, int rankingJ2, int rankingJvP, int rankingPC) // Já estou trabalhando neste método do ranking, favor não mexer || - marcZ
+    void ExibirRanking(int rankingJ1, int rankingJ2, int rankingJvP, int rankingPC)
     {
         Console.WriteLine("=============== Ranking ===============");
         Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
@@ -722,6 +698,7 @@ while (!fimDeJogo)
         Console.WriteLine($"Jogador (X): {rankingJvP} vitórias");
         Console.WriteLine($"Computador (O): {rankingPC} vitórias");
         Console.WriteLine("=======================================");
+        Console.WriteLine("Pressione Enter para voltar ao menu principal...");
         Console.ReadLine();
     }
 
@@ -750,4 +727,4 @@ while (!fimDeJogo)
 
 // ========================================================|
 
-// Boa noite por hoje filho do caos, amanhã a gente se vê || - marcZ
+// Boa noite Filho do CAOS, obrigado por tudo que você fez por nós <3 || - marcZ

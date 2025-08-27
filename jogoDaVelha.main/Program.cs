@@ -63,7 +63,7 @@ while (!fimDeJogo)
     switch (modoDeJogoConvert)
     {
         case 1:
-            InicieJogadorVSJogador(rankingJ1, rankingJ2);
+            InicieJogadorVSJogador();
             break;
 
         case 2:
@@ -71,7 +71,8 @@ while (!fimDeJogo)
             break;
 
         case 3:
-            ExibirRanking(rankingJ1, rankingJ2, rankingJvP, rankingPC);
+            Console.Write(rankingJ1);
+            ExibirRanking(1, 2, rankingJvP, rankingPC);
             break;
 
         case 4:
@@ -153,7 +154,7 @@ while (!fimDeJogo)
 
 
 
-    static void InicieJogadorVSJogador(int rankingJ1, int rankingJ2)
+    void InicieJogadorVSJogador()
     {
         //int rankingJ1 = 0;
         //int rankingJ2 = 0;
@@ -258,7 +259,7 @@ while (!fimDeJogo)
                                 if (resposta == "1")
                                 {
                                     Console.Clear();
-                                    InicieJogadorVSJogador(rankingJ1, rankingJ2);
+                                    InicieJogadorVSJogador();
 
                                 }
                             }
@@ -281,7 +282,7 @@ while (!fimDeJogo)
 
                                 if (resposta == "1")
                                 {
-                                    InicieJogadorVSJogador(rankingJ1, rankingJ2);
+                                    InicieJogadorVSJogador();
 
                                 }
                             }
@@ -313,7 +314,7 @@ while (!fimDeJogo)
 
                                 if (resposta == "1")
                                 {
-                                    InicieJogadorVSJogador(rankingJ1, rankingJ2);
+                                    InicieJogadorVSJogador();
                                 }
                             }
 
@@ -335,7 +336,7 @@ while (!fimDeJogo)
 
                                 if (resposta == "1")
                                 {
-                                    InicieJogadorVSJogador(rankingJ1, rankingJ2);
+                                    InicieJogadorVSJogador();
                                 }
                             }
 
@@ -364,7 +365,7 @@ while (!fimDeJogo)
 
                             if (resposta == "1")
                             {
-                                InicieJogadorVSJogador(rankingJ1, rankingJ2);
+                                InicieJogadorVSJogador();
                             }
                         }
 
@@ -386,7 +387,7 @@ while (!fimDeJogo)
 
                             if (resposta == "1")
                             {
-                                InicieJogadorVSJogador(rankingJ1, rankingJ2);
+                                InicieJogadorVSJogador();
                             }
                         }
 
@@ -413,7 +414,7 @@ while (!fimDeJogo)
 
                             if (resposta == "1")
                             {
-                                InicieJogadorVSJogador(rankingJ1, rankingJ2);
+                                InicieJogadorVSJogador();
                             }
                         }
 
@@ -435,7 +436,7 @@ while (!fimDeJogo)
 
                             if (resposta != "1")
                             {
-                                InicieJogadorVSJogador(rankingJ1, rankingJ2);
+                                InicieJogadorVSJogador();
                             }
 
                         }
@@ -712,7 +713,7 @@ while (!fimDeJogo)
 
     //==============================================================================================//
 
-    static void ExibirRanking(int rankingJ1, int rankingJ2, int rankingJvP, int rankingPC) // Já estou trabalhando neste método do ranking, favor não mexer || - marcZ
+    void ExibirRanking(int rankingJ1, int rankingJ2, int rankingJvP, int rankingPC) // Já estou trabalhando neste método do ranking, favor não mexer || - marcZ
     {
         Console.WriteLine("=============== Ranking ===============");
         Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
@@ -721,6 +722,7 @@ while (!fimDeJogo)
         Console.WriteLine($"Jogador (X): {rankingJvP} vitórias");
         Console.WriteLine($"Computador (O): {rankingPC} vitórias");
         Console.WriteLine("=======================================");
+        Console.ReadLine();
     }
 
     //=============================================================================================//

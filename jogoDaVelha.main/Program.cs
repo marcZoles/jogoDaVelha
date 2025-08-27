@@ -63,7 +63,7 @@ while (!fimDeJogo)
     switch (modoDeJogoConvert)
     {
         case 1:
-            InicieJogadorVSJogador(ref rankingJ1, ref rankingJ2);
+            InicieJogadorVSJogador(rankingJ1, rankingJ2);
             break;
 
         case 2:
@@ -153,7 +153,7 @@ while (!fimDeJogo)
 
 
 
-    static void InicieJogadorVSJogador(ref int rankingJ1, ref int rankingJ2)
+    static void InicieJogadorVSJogador(int rankingJ1, int rankingJ2)
     {
         //int rankingJ1 = 0;
         //int rankingJ2 = 0;
@@ -166,8 +166,8 @@ while (!fimDeJogo)
             string[,] tabuleiro = new string[3, 3];
             string turno = "X";
             int contadorTurnos = 0;
-            string mensagemVitoria = "O Jogador ( X ) Ganhou!";
-            string mensagemVitoria2 = "O Jogador ( O ) Ganhou!";
+            string mensagemVitoria = "\nO Jogador ( X ) Ganhou!";
+            string mensagemVitoria2 = "\nO Jogador ( O ) Ganhou!";
 
             Console.WriteLine("|=======================================|");
             Console.WriteLine("|  Modo selecionado: Jogador vs Jogador |");
@@ -244,6 +244,12 @@ while (!fimDeJogo)
                                 Console.WriteLine(mensagemVitoria);
                                 rankingJ1++;
 
+                                Console.WriteLine(" ");
+                                Console.WriteLine("=============== Ranking ===============");
+                                Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
+                                Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
+                                Console.WriteLine("=======================================");
+                                Console.WriteLine(" ");
                                 Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
                                 Console.WriteLine("1 - Sim");
                                 Console.WriteLine("2 - Não, voltar ao Menu Principal");
@@ -252,7 +258,7 @@ while (!fimDeJogo)
                                 if (resposta == "1")
                                 {
                                     Console.Clear();
-                                    InicieJogadorVSJogador(ref rankingJ1, ref rankingJ2);
+                                    InicieJogadorVSJogador(rankingJ1, rankingJ2);
 
                                 }
                             }
@@ -262,6 +268,12 @@ while (!fimDeJogo)
                                 Console.WriteLine(mensagemVitoria2);
                                 rankingJ2++;
 
+                                Console.WriteLine(" ");
+                                Console.WriteLine("=============== Ranking ===============");
+                                Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
+                                Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
+                                Console.WriteLine("=======================================");
+                                Console.WriteLine(" ");
                                 Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
                                 Console.WriteLine("1 - Sim");
                                 Console.WriteLine("2 - Não, voltar ao Menu Principal");
@@ -269,7 +281,7 @@ while (!fimDeJogo)
 
                                 if (resposta == "1")
                                 {
-                                    InicieJogadorVSJogador(ref rankingJ1, ref rankingJ2);
+                                    InicieJogadorVSJogador(rankingJ1, rankingJ2);
 
                                 }
                             }
@@ -288,6 +300,12 @@ while (!fimDeJogo)
                                 Console.WriteLine(mensagemVitoria);
                                 rankingJ1++;
 
+                                Console.WriteLine(" ");
+                                Console.WriteLine("=============== Ranking ===============");
+                                Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
+                                Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
+                                Console.WriteLine("=======================================");
+                                Console.WriteLine(" ");
                                 Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
                                 Console.WriteLine("1 - Sim");
                                 Console.WriteLine("2 - Não, voltar ao Menu Principal");
@@ -295,7 +313,7 @@ while (!fimDeJogo)
 
                                 if (resposta == "1")
                                 {
-                                    InicieJogadorVSJogador(ref rankingJ1, ref rankingJ2);
+                                    InicieJogadorVSJogador(rankingJ1, rankingJ2);
                                 }
                             }
 
@@ -304,6 +322,12 @@ while (!fimDeJogo)
                                 Console.WriteLine(mensagemVitoria2);
                                 rankingJ2++;
 
+                                Console.WriteLine(" ");
+                                Console.WriteLine("=============== Ranking ===============");
+                                Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
+                                Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
+                                Console.WriteLine("=======================================");
+                                Console.WriteLine(" ");
                                 Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
                                 Console.WriteLine("1 - Sim");
                                 Console.WriteLine("2 - Não, voltar ao Menu Principal");
@@ -311,7 +335,7 @@ while (!fimDeJogo)
 
                                 if (resposta == "1")
                                 {
-                                    InicieJogadorVSJogador(ref rankingJ1, ref rankingJ2);
+                                    InicieJogadorVSJogador(rankingJ1, rankingJ2);
                                 }
                             }
 
@@ -327,6 +351,12 @@ while (!fimDeJogo)
                             Console.WriteLine(mensagemVitoria);
                             rankingJ1++;
 
+                            Console.WriteLine(" ");
+                            Console.WriteLine("=============== Ranking ===============");
+                            Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
+                            Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
+                            Console.WriteLine("=======================================");
+                            Console.WriteLine(" ");
                             Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
                             Console.WriteLine("1 - Sim");
                             Console.WriteLine("2 - Não, voltar ao Menu Principal");
@@ -334,7 +364,7 @@ while (!fimDeJogo)
 
                             if (resposta == "1")
                             {
-                                InicieJogadorVSJogador(ref rankingJ1, ref rankingJ2);
+                                InicieJogadorVSJogador(rankingJ1, rankingJ2);
                             }
                         }
 
@@ -343,6 +373,12 @@ while (!fimDeJogo)
                             Console.WriteLine(mensagemVitoria2);
                             rankingJ2++;
 
+                            Console.WriteLine(" ");
+                            Console.WriteLine("=============== Ranking ===============");
+                            Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
+                            Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
+                            Console.WriteLine("=======================================");
+                            Console.WriteLine(" ");
                             Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
                             Console.WriteLine("1 - Sim");
                             Console.WriteLine("2 - Não, voltar ao Menu Principal");
@@ -350,7 +386,7 @@ while (!fimDeJogo)
 
                             if (resposta == "1")
                             {
-                                InicieJogadorVSJogador(ref rankingJ1, ref rankingJ2);
+                                InicieJogadorVSJogador(rankingJ1, rankingJ2);
                             }
                         }
 
@@ -364,6 +400,12 @@ while (!fimDeJogo)
                             Console.WriteLine(mensagemVitoria);
                             rankingJ1++;
 
+                            Console.WriteLine(" ");
+                            Console.WriteLine("=============== Ranking ===============");
+                            Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
+                            Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
+                            Console.WriteLine("=======================================");
+                            Console.WriteLine(" ");
                             Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
                             Console.WriteLine("1 - Sim");
                             Console.WriteLine("2 - Não, voltar ao Menu Principal");
@@ -371,7 +413,7 @@ while (!fimDeJogo)
 
                             if (resposta == "1")
                             {
-                                InicieJogadorVSJogador(ref rankingJ1, ref rankingJ2);
+                                InicieJogadorVSJogador(rankingJ1, rankingJ2);
                             }
                         }
 
@@ -380,6 +422,12 @@ while (!fimDeJogo)
                             Console.WriteLine(mensagemVitoria2);
                             rankingJ2++;
 
+                            Console.WriteLine(" ");
+                            Console.WriteLine("=============== Ranking ===============");
+                            Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
+                            Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
+                            Console.WriteLine("=======================================");
+                            Console.WriteLine(" ");
                             Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
                             Console.WriteLine("1 - Sim");
                             Console.WriteLine("2 - Não, voltar ao Menu Principal");
@@ -387,7 +435,7 @@ while (!fimDeJogo)
 
                             if (resposta != "1")
                             {
-                                InicieJogadorVSJogador(ref rankingJ1, ref rankingJ2);
+                                InicieJogadorVSJogador(rankingJ1, rankingJ2);
                             }
 
                         }

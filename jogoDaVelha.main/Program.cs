@@ -152,7 +152,7 @@ while (!fimDeJogo)
     }
 
 
-
+//=========================================================================================//
 
     void InicieJogadorVSJogador() // Não alterar para "static void..." ISSO DESTRÓI O RANKING || - marcZ
     {
@@ -160,21 +160,15 @@ while (!fimDeJogo)
 
         do
         {
-
             string[,] tabuleiro = new string[3, 3];
             string turno = "X";
             int contadorTurnos = 0;
-            string mensagemVitoria = "\nO Jogador ( X ) Ganhou!";
-            string mensagemVitoria2 = "\nO Jogador ( O ) Ganhou!";
 
             Console.WriteLine("|=======================================|");
             Console.WriteLine("|  Modo selecionado: Jogador vs Jogador |");
             Console.WriteLine("|=======================================|");
 
-            //=======================================================================//
-
             CriarTabuleiro(tabuleiro);
-
             ImprimirTabuleiro(tabuleiro);
 
             while (contadorTurnos < 9)
@@ -198,14 +192,12 @@ while (!fimDeJogo)
                             tabuleiro[linha, coluna] = turno;
                             jogadaValida = true;
                         }
-
                         else
                         {
                             Console.WriteLine("Esta posição já está ocupada! Tente novamente.");
                             jogada = Console.ReadLine();
                         }
                     }
-
                     else
                     {
                         Console.WriteLine("Jogada inválida! Digite um número de 1 a 9.");
@@ -215,228 +207,41 @@ while (!fimDeJogo)
 
                 ImprimirTabuleiro(tabuleiro);
 
-                if (contadorTurnos > 3)
+                if (contadorTurnos >= 4) // só dá pra ter vitória a partir da 5ª jogada
                 {
+                    string vencedor = VerificarVencedor(tabuleiro);
 
-                    for (int i = 0; i < 3; i++)
+                    if (vencedor == "X" || vencedor == "O")
                     {
-                        if (tabuleiro[i, 0] == tabuleiro[i, 1] && tabuleiro[i, 1] == tabuleiro[i, 2])
+                        Console.WriteLine($"\nO Jogador ( {vencedor} ) Ganhou!");
+
+                        if (vencedor == "X") rankingJ1++;
+                        else rankingJ2++;
+
+                        Console.WriteLine(" ");
+                        Console.WriteLine("=============== Ranking ===============");
+                        Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
+                        Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
+                        Console.WriteLine("=======================================");
+                        Console.WriteLine(" ");
+                        Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
+                        Console.WriteLine("1 - Sim");
+                        Console.WriteLine("2 - Não, voltar ao Menu Principal");
+                        string resposta = Console.ReadLine();
+
+                        if (resposta == "1")
                         {
-                            if (turno == "X")
-                            {
-                                Console.WriteLine(mensagemVitoria);
-                                rankingJ1++;
-
-                                Console.WriteLine(" ");
-                                Console.WriteLine("=============== Ranking ===============");
-                                Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
-                                Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
-                                Console.WriteLine("=======================================");
-                                Console.WriteLine(" ");
-                                Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
-                                Console.WriteLine("1 - Sim");
-                                Console.WriteLine("2 - Não, voltar ao Menu Principal");
-                                string resposta = Console.ReadLine();
-
-                                if (resposta == "1")
-                                {
-                                    Console.Clear();
-                                    InicieJogadorVSJogador();
-
-                                }
-                            }
-
-                            else
-                            {
-                                Console.WriteLine(mensagemVitoria2);
-                                rankingJ2++;
-
-                                Console.WriteLine(" ");
-                                Console.WriteLine("=============== Ranking ===============");
-                                Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
-                                Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
-                                Console.WriteLine("=======================================");
-                                Console.WriteLine(" ");
-                                Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
-                                Console.WriteLine("1 - Sim");
-                                Console.WriteLine("2 - Não, voltar ao Menu Principal");
-                                string resposta = Console.ReadLine();
-
-                                if (resposta == "1")
-                                {
-                                    InicieJogadorVSJogador();
-
-                                }
-                            }
-                            return;
+                            InicieJogadorVSJogador();
                         }
 
-
-                    }
-
-                    for (int j = 0; j < 3; j++)
-                    {
-                        if (tabuleiro[0, j] == tabuleiro[1, j] && tabuleiro[1, j] == tabuleiro[2, j])
-                        {
-                            if (turno == "X")
-                            {
-                                Console.WriteLine(mensagemVitoria);
-                                rankingJ1++;
-
-                                Console.WriteLine(" ");
-                                Console.WriteLine("=============== Ranking ===============");
-                                Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
-                                Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
-                                Console.WriteLine("=======================================");
-                                Console.WriteLine(" ");
-                                Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
-                                Console.WriteLine("1 - Sim");
-                                Console.WriteLine("2 - Não, voltar ao Menu Principal");
-                                string resposta = Console.ReadLine();
-
-                                if (resposta == "1")
-                                {
-                                    InicieJogadorVSJogador();
-                                }
-                            }
-
-                            else
-                            {
-                                Console.WriteLine(mensagemVitoria2);
-                                rankingJ2++;
-
-                                Console.WriteLine(" ");
-                                Console.WriteLine("=============== Ranking ===============");
-                                Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
-                                Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
-                                Console.WriteLine("=======================================");
-                                Console.WriteLine(" ");
-                                Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
-                                Console.WriteLine("1 - Sim");
-                                Console.WriteLine("2 - Não, voltar ao Menu Principal");
-                                string resposta = Console.ReadLine();
-
-                                if (resposta == "1")
-                                {
-                                    InicieJogadorVSJogador();
-                                }
-                            }
-
-                            return;
-                        }
-                    }
-
-                    if (tabuleiro[0, 0] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 2])
-                    {
-                        if (turno == "X")
-                        {
-                            Console.WriteLine(mensagemVitoria);
-                            rankingJ1++;
-
-                            Console.WriteLine(" ");
-                            Console.WriteLine("=============== Ranking ===============");
-                            Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
-                            Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
-                            Console.WriteLine("=======================================");
-                            Console.WriteLine(" ");
-                            Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
-                            Console.WriteLine("1 - Sim");
-                            Console.WriteLine("2 - Não, voltar ao Menu Principal");
-                            string resposta = Console.ReadLine();
-
-                            if (resposta == "1")
-                            {
-                                InicieJogadorVSJogador();
-                            }
-                        }
-
-                        else
-                        {
-                            Console.WriteLine(mensagemVitoria2);
-                            rankingJ2++;
-
-                            Console.WriteLine(" ");
-                            Console.WriteLine("=============== Ranking ===============");
-                            Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
-                            Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
-                            Console.WriteLine("=======================================");
-                            Console.WriteLine(" ");
-                            Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
-                            Console.WriteLine("1 - Sim");
-                            Console.WriteLine("2 - Não, voltar ao Menu Principal");
-                            string resposta = Console.ReadLine();
-
-                            if (resposta == "1")
-                            {
-                                InicieJogadorVSJogador();
-                            }
-                        }
-
-                        return;
-                    }
-
-                    if (tabuleiro[0, 2] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 0])
-                    {
-                        if (turno == "X")
-                        {
-                            Console.WriteLine(mensagemVitoria);
-                            rankingJ1++;
-
-                            Console.WriteLine(" ");
-                            Console.WriteLine("=============== Ranking ===============");
-                            Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
-                            Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
-                            Console.WriteLine("=======================================");
-                            Console.WriteLine(" ");
-                            Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
-                            Console.WriteLine("1 - Sim");
-                            Console.WriteLine("2 - Não, voltar ao Menu Principal");
-                            string resposta = Console.ReadLine();
-
-                            if (resposta == "1")
-                            {
-                                InicieJogadorVSJogador();
-                            }
-                        }
-
-                        else
-                        {
-                            Console.WriteLine(mensagemVitoria2);
-                            rankingJ2++;
-
-                            Console.WriteLine(" ");
-                            Console.WriteLine("=============== Ranking ===============");
-                            Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
-                            Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
-                            Console.WriteLine("=======================================");
-                            Console.WriteLine(" ");
-                            Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
-                            Console.WriteLine("1 - Sim");
-                            Console.WriteLine("2 - Não, voltar ao Menu Principal");
-                            string resposta = Console.ReadLine();
-
-                            if (resposta != "1")
-                            {
-                                InicieJogadorVSJogador();
-                            }
-
-                        }
-
-                        return;
+                        return; // encerra a função após vitória
                     }
                 }
 
                 contadorTurnos++;
 
-                if (contadorTurnos % 2 == 0)
-                {
-                    turno = "X";
-                }
-
-                else
-                {
-                    turno = "O";
-                }
+                // alterna turno
+                turno = (turno == "X") ? "O" : "X";
 
                 if (contadorTurnos == 9)
                 {
@@ -451,10 +256,11 @@ while (!fimDeJogo)
                         continuar = false;
                     }
                 }
-            }           
+            }
 
         } while (continuar);
     }
+
 
     // ========================================================================================================//
 
@@ -701,6 +507,45 @@ while (!fimDeJogo)
         Console.WriteLine("Pressione Enter para voltar ao menu principal...");
         Console.ReadLine();
     }
+
+    //=============================================================================================//
+
+    static string VerificarVencedor(string[,] tabuleiro)
+    {
+        // Verifica linhas
+        for (int i = 0; i < 3; i++)
+        {
+            if (tabuleiro[i, 0] == tabuleiro[i, 1] && tabuleiro[i, 1] == tabuleiro[i, 2])
+            {
+                return tabuleiro[i, 0]; // "X" ou "O"
+            }
+        }
+
+        // Verifica colunas
+        for (int j = 0; j < 3; j++)
+        {
+            if (tabuleiro[0, j] == tabuleiro[1, j] && tabuleiro[1, j] == tabuleiro[2, j])
+            {
+                return tabuleiro[0, j];
+            }
+        }
+
+        // Verifica diagonal principal
+        if (tabuleiro[0, 0] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 2])
+        {
+            return tabuleiro[0, 0];
+        }
+
+        // Verifica diagonal secundária
+        if (tabuleiro[0, 2] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 0])
+        {
+            return tabuleiro[0, 2];
+        }
+
+        // Nenhum vencedor
+        return "";
+    }
+
 
     //=============================================================================================//
 

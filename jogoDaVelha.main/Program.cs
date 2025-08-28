@@ -72,7 +72,7 @@ while (!fimDeJogo)
             break;
 
         case 3:
-            ExibirRanking(1, 2, rankingJvP, rankingPC); // Se tirar estes números 1 e 2 dá BO no código, já estou verificando como corrigir || - marcZ
+            ExibirRanking(rankingJ1, rankingJ2, rankingJvP, rankingPC);
             break;
 
         case 4:
@@ -726,5 +726,3 @@ while (!fimDeJogo)
 // NÃO MEXER NO FILHO DO CAOS, ELE É O QUE FAZ O JOGO FUNCIONAR
 
 // ========================================================|
-
-// Boa noite Filho do CAOS, obrigado por tudo que você fez por nós <3 || - marcZ

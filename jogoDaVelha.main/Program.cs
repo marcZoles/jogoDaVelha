@@ -264,7 +264,7 @@ while (!fimDeJogo)
 
     // ========================================================================================================//
 
-    static void InicieJogadorVSPc()
+    void InicieJogadorVSPc()
     {
 
         bool continuar = true;
@@ -298,44 +298,29 @@ while (!fimDeJogo)
                 }
             }
 
-            Console.WriteLine("Deseja jogar novamente no modo Jogador vs Computador?");
-            Console.WriteLine("1 - Sim");
-            Console.WriteLine("2 - Não, voltar ao Menu Principal");
-            string resposta = Console.ReadLine();
-
-            if (resposta != "1")
-            {
-                continuar = false;
-            }
         } while (continuar);
     }
 
     // ========================================================================================================//
 
-    static void InicieModoFacil()
+    void InicieModoFacil()
     {
+        bool continuar = true;
         string[,] tabuleiro = new string[3, 3];
         string jogador1 = "X";
         string computador = "O";
-        int rankingJvP = 0;
-        int rankingPC = 0;
         string turno = "X";
         int contadorTurnos = 0;
-        string mensagemVitoria = "O Jogador ( X ) Ganhou!";
-        string mensagemVitoria2 = "O Computador ( O ) Ganhou!";
 
-        //================================================================================//
+        string mensagemVitoriaJogador = "O Jogador ( X ) Ganhou!";
+        string mensagemVitoriaPC = "O Computador ( O ) Ganhou!";
 
         Console.WriteLine("|-------------------|");
         Console.WriteLine("|=== Modo Fácil ====|");
         Console.WriteLine("|-------------------|");
 
         CriarTabuleiro(tabuleiro);
-
         ImprimirTabuleiro(tabuleiro);
-
-        //=============================== Logica do jogo =================================//
-
 
         while (contadorTurnos < 9)
         {
@@ -354,10 +339,11 @@ while (!fimDeJogo)
                 Console.Write(".");
                 Thread.Sleep(2000);
 
+                // PC joga no primeiro espaço vazio que encontrar
                 for (int i = 0; i < 3 && jogada == ""; i++)
-                {                    
+                {
                     for (int j = 0; j < 3; j++)
-                    {                        
+                    {
                         if (tabuleiro[i, j] != "X" && tabuleiro[i, j] != "O")
                         {
                             jogada = tabuleiro[i, j];
@@ -366,17 +352,41 @@ while (!fimDeJogo)
                     }
                 }
             }
-
             else
             {
                 Console.WriteLine("|====================================|");
                 Console.Write($" Vez do Jogador {turno}: ");
                 jogada = Console.ReadLine();
                 Console.WriteLine("|====================================|");
+
+                // Validação básica da jogada
+                bool jogadaValida = false;
+                while (!jogadaValida)
+                {
+                    if (int.TryParse(jogada, out int posicao) && posicao >= 1 && posicao <= 9)
+                    {
+                        int linha = (posicao - 1) / 3;
+                        int coluna = (posicao - 1) % 3;
+
+                        if (tabuleiro[linha, coluna] != "X" && tabuleiro[linha, coluna] != "O")
+                        {
+                            jogadaValida = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Esta posição já está ocupada! Tente novamente.");
+                            jogada = Console.ReadLine();
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Jogada inválida! Digite um número de 1 a 9.");
+                        jogada = Console.ReadLine();
+                    }
+                }
             }
 
-            //=================================== Atualização / impressão do tabuleiro =====================//
-
+            // Atualiza tabuleiro
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
@@ -390,99 +400,84 @@ while (!fimDeJogo)
 
             ImprimirTabuleiro(tabuleiro);
 
+            if (contadorTurnos >= 4) // só verifica vitória a partir da 5ª jogada
+            {
+                string vencedor = VerificarVencedor(tabuleiro);
+
+                if (vencedor == "X" || vencedor == "O")
+                {
+                    if (vencedor == "X")
+                    {
+                        Console.WriteLine(mensagemVitoriaJogador);
+                        rankingJvP++;
+
+                        Console.WriteLine(" ");
+                        Console.WriteLine("=============== Ranking ===============");
+                        Console.WriteLine($"Jogador (X): {rankingJvP} vitórias");
+                        Console.WriteLine($"Computador (O): {rankingPC} vitórias");
+                        Console.WriteLine("=======================================");
+                        Console.WriteLine(" ");
+                        Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
+                        Console.WriteLine("1 - Sim");
+                        Console.WriteLine("2 - Não, voltar ao Menu Principal");
+                        string resposta = Console.ReadLine();
+
+                        if (resposta != "1")
+                        {
+                            continuar = false;
+                        }
+
+                        else
+                        {
+                            InicieJogadorVSPc();
+                        }                            
+                    }
+
+                    else
+                    {
+                        Console.WriteLine(mensagemVitoriaPC);
+                        rankingPC++;
+
+                        Console.WriteLine(" ");
+                        Console.WriteLine("=============== Ranking ===============");
+                        Console.WriteLine($"Jogador (X): {rankingJvP} vitórias");
+                        Console.WriteLine($"Computador (O): {rankingPC} vitórias");
+                        Console.WriteLine("=======================================");
+                        Console.WriteLine(" ");
+                        Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
+                        Console.WriteLine("1 - Sim");
+                        Console.WriteLine("2 - Não, voltar ao Menu Principal");
+                        string resposta = Console.ReadLine();
+
+                        if (resposta != "1")
+                        {
+                            continuar = false;
+                        }
+
+                        else
+                        {
+                            InicieJogadorVSPc();
+                        }
+
+                    }
+
+                    return; // fim da partida
+                }
+            }
+
             contadorTurnos++;
 
-            if (turno == jogador1) // Controle de turnos
+            // Alterna turno
+            turno = (turno == jogador1) ? computador : jogador1;
+
+            if (contadorTurnos == 9)
             {
-                turno = computador;
-            }
-
-            else
-            {
-                turno = jogador1;
-            }
-        }
-
-        if (contadorTurnos > 3)
-        {
-            if (contadorTurnos > 3)
-            {
-                for (int i = 0; i < 3; i++) // Verifica linhas
-                {
-                    if (tabuleiro[i, 0] == tabuleiro[i, 1] && tabuleiro[i, 1] == tabuleiro[i, 2])
-                    {
-                        if (turno == "X")
-                        {
-                            Console.WriteLine(mensagemVitoria);
-                            rankingJvP++;
-                        }
-
-                        else
-                        {
-                            Console.WriteLine(mensagemVitoria2);
-                            rankingPC++;
-                        }
-
-                        return;
-                    }
-                }
-
-                for (int j = 0; j < 3; j++) // Verifica colunas
-                {
-                    if (tabuleiro[0, j] == tabuleiro[1, j] && tabuleiro[1, j] == tabuleiro[2, j])
-                    {
-                        if (turno == "X")
-                        {
-                            Console.WriteLine(mensagemVitoria);
-                            rankingJvP++;
-                        }
-
-                        else
-                        {
-                            Console.WriteLine(mensagemVitoria2);
-                            rankingPC++;
-                        }
-                        return;
-                    }
-                }
-
-                // Verifica se a diagonal principal está completa
-                if (tabuleiro[0, 0] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 2])
-                {
-                    if (turno == "X")
-                    {
-                        Console.WriteLine(mensagemVitoria);
-                        rankingJvP++;
-                    }
-
-                    else
-                    {
-                        Console.WriteLine(mensagemVitoria2);
-                        rankingPC++;
-                    }
-                    return;
-                }
-
-                // Verifica se a diagonal secundária está completa
-                if (tabuleiro[0, 2] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 0])
-                {
-                    if (turno == "X")
-                    {
-                        Console.WriteLine(mensagemVitoria);
-                        rankingJvP++;
-                    }
-
-                    else
-                    {
-                        Console.WriteLine(mensagemVitoria2);
-                        rankingPC++;
-                    }
-
-                    return;
-                }
+                Console.WriteLine("Deu velha! Ninguém ganhou dessa vez :(");
+                return;
             }
         }
     }
+
 
     //=============================================================================================//
 

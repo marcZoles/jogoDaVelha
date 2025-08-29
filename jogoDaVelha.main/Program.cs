@@ -7,10 +7,7 @@
 
 //                SETOR DE COMENTÁRIOS
 
-// Criar uma função para fazer a verificação das combinações vencedoras (linhas, colunas e diagonais)
-// E em seguida adicionar esta função na lógica do jogo (tanto no modo Jogador VS Jogador quanto no modo Jogador VS PC)
-// Por fim, incluir verificação de jogada inválida (ex: letra, número fora do intervalo, casa já ocupada) no modo Jogador VS PC || - marcZ
-
+// Falta criar o modo difícil do jogo contra o computador || - marcZ
 
 // ========================================================|
 
@@ -36,9 +33,15 @@ string posicionar = new string(' ', espacosNecessarios);
 while (!fimDeJogo)
 {
     Console.Clear();
+    Console.WriteLine("|========================================================================|");
+    Console.WriteLine("|                    TRABALHO DE CONCLUSÃO DE MATÉRIA                    |");
+    Console.WriteLine("| FEITO POR: Gabriel Marczal; Bianca Michoski; Thais Colaço; José Guides |");
+    Console.WriteLine("|========================================================================|");
+    Console.WriteLine(" ");
     Console.WriteLine("|=======================================================|");
     Console.WriteLine("|||||||||||||||||||---MENU PRINCIPAL---||||||||||||||||||");
     Console.WriteLine("|=======================================================|");
+    Console.WriteLine(" ");
 
 
     Console.WriteLine("Bem vindo ao jogo da velha!");
@@ -192,12 +195,14 @@ while (!fimDeJogo)
                             tabuleiro[linha, coluna] = turno;
                             jogadaValida = true;
                         }
+
                         else
                         {
                             Console.WriteLine("Esta posição já está ocupada! Tente novamente.");
                             jogada = Console.ReadLine();
                         }
                     }
+
                     else
                     {
                         Console.WriteLine("Jogada inválida! Digite um número de 1 a 9.");
@@ -207,7 +212,7 @@ while (!fimDeJogo)
 
                 ImprimirTabuleiro(tabuleiro);
 
-                if (contadorTurnos >= 4) // só dá pra ter vitória a partir da 5ª jogada
+                if (contadorTurnos >= 4)
                 {
                     string vencedor = VerificarVencedor(tabuleiro);
 
@@ -234,7 +239,7 @@ while (!fimDeJogo)
                             InicieJogadorVSJogador();
                         }
 
-                        return; // encerra a função após vitória
+                        return;
                     }
                 }
 
@@ -339,7 +344,6 @@ while (!fimDeJogo)
                 Console.Write(".");
                 Thread.Sleep(2000);
 
-                // PC joga no primeiro espaço vazio que encontrar
                 for (int i = 0; i < 3 && jogada == ""; i++)
                 {
                     for (int j = 0; j < 3; j++)
@@ -359,7 +363,7 @@ while (!fimDeJogo)
                 jogada = Console.ReadLine();
                 Console.WriteLine("|====================================|");
 
-                // Validação básica da jogada
+                // Validação se jogada é valida
                 bool jogadaValida = false;
                 while (!jogadaValida)
                 {
@@ -400,7 +404,7 @@ while (!fimDeJogo)
 
             ImprimirTabuleiro(tabuleiro);
 
-            if (contadorTurnos >= 4) // só verifica vitória a partir da 5ª jogada
+            if (contadorTurnos >= 4)
             {
                 string vencedor = VerificarVencedor(tabuleiro);
 
@@ -417,12 +421,12 @@ while (!fimDeJogo)
                         Console.WriteLine($"Computador (O): {rankingPC} vitórias");
                         Console.WriteLine("=======================================");
                         Console.WriteLine(" ");
-                        Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
+                        Console.WriteLine("Deseja jogar novamente no modo Jogador vs Computador?");
                         Console.WriteLine("1 - Sim");
                         Console.WriteLine("2 - Não, voltar ao Menu Principal");
                         string resposta = Console.ReadLine();
 
-                        if (resposta != "1")
+                        if (resposta != "1") // Do jeito que está, qualquer resposta diferente de "1" encerra o jogo - Verificar se não dá pra melhorar isso || - marcZ
                         {
                             continuar = false;
                         }
@@ -444,7 +448,7 @@ while (!fimDeJogo)
                         Console.WriteLine($"Computador (O): {rankingPC} vitórias");
                         Console.WriteLine("=======================================");
                         Console.WriteLine(" ");
-                        Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
+                        Console.WriteLine("Deseja jogar novamente no modo Jogador vs Computador?");
                         Console.WriteLine("1 - Sim");
                         Console.WriteLine("2 - Não, voltar ao Menu Principal");
                         string resposta = Console.ReadLine();
@@ -507,7 +511,6 @@ while (!fimDeJogo)
 
     static string VerificarVencedor(string[,] tabuleiro)
     {
-        // Verifica linhas
         for (int i = 0; i < 3; i++)
         {
             if (tabuleiro[i, 0] == tabuleiro[i, 1] && tabuleiro[i, 1] == tabuleiro[i, 2])
@@ -516,7 +519,6 @@ while (!fimDeJogo)
             }
         }
 
-        // Verifica colunas
         for (int j = 0; j < 3; j++)
         {
             if (tabuleiro[0, j] == tabuleiro[1, j] && tabuleiro[1, j] == tabuleiro[2, j])
@@ -525,13 +527,11 @@ while (!fimDeJogo)
             }
         }
 
-        // Verifica diagonal principal
         if (tabuleiro[0, 0] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 2])
         {
             return tabuleiro[0, 0];
         }
 
-        // Verifica diagonal secundária
         if (tabuleiro[0, 2] == tabuleiro[1, 1] && tabuleiro[1, 1] == tabuleiro[2, 0])
         {
             return tabuleiro[0, 2];

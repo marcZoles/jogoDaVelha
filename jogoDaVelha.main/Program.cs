@@ -27,6 +27,9 @@ string centralizar = "centralizar";
 int larguraConsole = Console.WindowWidth;
 int espacosNecessarios = (larguraConsole - centralizar.Length) / 2;
 string posicionar = new string(' ', espacosNecessarios);
+bool sair = false;
+int modoDeJogoConvert;
+string resposta = "";
 
 // ========================================================|
 
@@ -43,55 +46,55 @@ while (!fimDeJogo)
     Console.WriteLine("|=======================================================|");
     Console.WriteLine(" ");
 
+   
+        Console.WriteLine("Bem vindo ao jogo da velha!");
+        Console.WriteLine("Escolha o modo de jogo: ");
+        Console.WriteLine("1 - Jogador vs Jogador");
+        Console.WriteLine("2 - Jogador vs Computador");
+        Console.WriteLine("3 - Exibir Ranking");
+        Console.WriteLine("4 - Sair do Jogo");
+        Console.Write("Selecione: ");
+        string modoDeJogo = Console.ReadLine();
+        modoDeJogoConvert = Convert.ToInt32(modoDeJogo);
 
-    Console.WriteLine("Bem vindo ao jogo da velha!");
-    Console.WriteLine("Escolha o modo de jogo: ");
-    Console.WriteLine("1 - Jogador vs Jogador");
-    Console.WriteLine("2 - Jogador vs Computador");
-    Console.WriteLine("3 - Exibir Ranking");
-    Console.WriteLine("4 - Sair do Jogo");
-    Console.Write("Selecione: ");
+        if (!int.TryParse(modoDeJogo, out modoDeJogoConvert))
+        {
+            /* Esse if está em branco pois ele serve apenas para fazer a verificação se o usuário digitou um NUMERO
+             * pq ele vai executar o código que está no switch, entao nao precisa de uma mensagem de erro
+             */
+        }
 
-    string modoDeJogo = Console.ReadLine();
-    int modoDeJogoConvert;
+        Console.Clear();
 
-    if (!int.TryParse(modoDeJogo, out modoDeJogoConvert))
-    {
-        /* Esse if está em branco pois ele serve apenas para fazer a verificação se o usuário digitou um NUMERO
-         * pq ele vai executar o código que está no switch, entao nao precisa de uma mensagem de erro
-         */
-    }
+        switch (modoDeJogoConvert)
+        {
+            case 1:
+                InicieJogadorVSJogador();
+                break;
 
-    Console.Clear();
+            case 2:
+                InicieJogadorVSPc();
+                break;
 
-    switch (modoDeJogoConvert)
-    {
-        case 1:
-            InicieJogadorVSJogador();
-            break;
+            case 3:
+                ExibirRanking(rankingJ1, rankingJ2, rankingJvP, rankingPC);
+                break;
 
-        case 2:
-            InicieJogadorVSPc();
-            break;
+            case 4:
+                Console.WriteLine("Jogo encerrado!");
+                modoDeJogoConvert = 4;
+                fimDeJogo = true;
+                break;
 
-        case 3:
-            ExibirRanking(rankingJ1, rankingJ2, rankingJvP, rankingPC);
-            break;
+            default:
 
-        case 4:
-            Console.WriteLine("Jogo encerrado!");
-            modoDeJogoConvert = 4;
-            fimDeJogo = true;
-            break;
-
-        default:
-
-            Console.WriteLine("Opção inválida! Tente novamente digitando um valor númerico ou uma das opções abaixo");
-            continue; /* O continue, como o nome diz continua o loop (esse codigo esta dentro de um while, para que o usuário
+                Console.WriteLine("Opção inválida! Tente novamente digitando um valor númerico ou uma das opções abaixo");
+                continue; /* O continue, como o nome diz continua o loop (esse codigo esta dentro de um while, para que o usuário
                        * consiga digitar outra opção válida
                       */
+        
     }
-
+    
     static void CriarTabuleiro(string[,] tabuleiro)
     {
         int mioloDoTabuleiro = 1;
@@ -232,7 +235,7 @@ while (!fimDeJogo)
                         Console.WriteLine("Deseja jogar novamente no modo Jogador vs Jogador?");
                         Console.WriteLine("1 - Sim");
                         Console.WriteLine("2 - Não, voltar ao Menu Principal");
-                        string resposta = Console.ReadLine();
+                        resposta = Console.ReadLine();
 
                         if (resposta == "1")
                         {
@@ -286,7 +289,7 @@ while (!fimDeJogo)
 
 
             string dificuldade = Console.ReadLine().ToUpper();
-            { // Precisa dessas chaves para o switch funcionar corretamente? || - marcZ
+            { // Precisa dessas chaves para o switch funcionar corretamente? || - marcZ //R: Sim, precisa porem para os cases não xD - Thais
                 switch (dificuldade)
                 {
                     case "F":
@@ -303,7 +306,7 @@ while (!fimDeJogo)
                 }
             }
 
-        } while (continuar);
+        } while (!continuar);
     }
 
     // ========================================================================================================//
@@ -425,17 +428,16 @@ while (!fimDeJogo)
                         Console.WriteLine("1 - Sim");
                         Console.WriteLine("2 - Não, voltar ao Menu Principal");
                         string resposta = Console.ReadLine();
-
-                        if (resposta != "1") // Do jeito que está, qualquer resposta diferente de "1" encerra o jogo - Verificar se não dá pra melhorar isso || - marcZ
-                        {
-                            continuar = false;
-                        }
-
-                        else
+                        if(resposta == "1")
                         {
                             InicieJogadorVSPc();
-                        }                            
-                    }
+                        }
+                        else
+                        {
+                            continuar = false; //DDDDDDDDDDDDAAAAAAAAAAAAAAAAAALLLLLLLLLLLLEEEEEEEEEEEEEEEEEE, SEXTOOOOOOOUUUUUUUUUUUUU
+                        }
+       
+                     }
 
                     else
                     {
@@ -453,16 +455,15 @@ while (!fimDeJogo)
                         Console.WriteLine("2 - Não, voltar ao Menu Principal");
                         string resposta = Console.ReadLine();
 
-                        if (resposta != "1")
-                        {
-                            continuar = false;
-                        }
-
-                        else
+                        if (resposta == "1")
                         {
                             InicieJogadorVSPc();
                         }
-
+                        else
+                        {
+                           continuar = false;
+                        }
+    
                     }
 
                     return; // fim da partida

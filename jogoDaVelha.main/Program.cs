@@ -59,12 +59,15 @@ while (!fimDeJogo)
 
         if (!int.TryParse(modoDeJogo, out modoDeJogoConvert))
         {
-            /* Esse if está em branco pois ele serve apenas para fazer a verificação se o usuário digitou um NUMERO
-             * pq ele vai executar o código que está no switch, entao nao precisa de uma mensagem de erro
-             */
-        }
+        /* Esse if está em branco pois ele serve apenas para fazer a verificação se o usuário digitou um NUMERO
+         * pq ele vai executar o código que está no switch, entao nao precisa de uma mensagem de erro
+         * 
+         * Precisamos adicionar o controle para solicitar um novo input ao usuário, caso ele digite algo inválido
+         * Pq não está caindo no default do switch || - marcZ
+         */
+    }
 
-        Console.Clear();
+    Console.Clear();
 
         switch (modoDeJogoConvert)
         {
@@ -160,7 +163,7 @@ while (!fimDeJogo)
 
 //=========================================================================================//
 
-    void InicieJogadorVSJogador() // Não alterar para "static void..." ISSO DESTRÓI O RANKING || - marcZ
+    void InicieJogadorVSJogador()
     {
         bool continuar = true;
 
@@ -289,7 +292,7 @@ while (!fimDeJogo)
 
 
             string dificuldade = Console.ReadLine().ToUpper();
-            { // Precisa dessas chaves para o switch funcionar corretamente? || - marcZ //R: Sim, precisa porem para os cases não xD - Thais
+            {
                 switch (dificuldade)
                 {
                     case "F":
@@ -301,7 +304,8 @@ while (!fimDeJogo)
                         break;
 
                     default:
-                        Console.WriteLine("Opção invalida");
+                        Console.WriteLine("Opção invalida"); // Adicionar controle para solicitar novo input ao usuário,
+                                                             // Atualmente não está funcionando e volta ao menu principal || - marcZ
                         break;
                 }
             }
@@ -359,6 +363,7 @@ while (!fimDeJogo)
                     }
                 }
             }
+
             else
             {
                 Console.WriteLine("|====================================|");
@@ -379,12 +384,14 @@ while (!fimDeJogo)
                         {
                             jogadaValida = true;
                         }
+
                         else
                         {
                             Console.WriteLine("Esta posição já está ocupada! Tente novamente.");
                             jogada = Console.ReadLine();
                         }
                     }
+
                     else
                     {
                         Console.WriteLine("Jogada inválida! Digite um número de 1 a 9.");
@@ -428,15 +435,16 @@ while (!fimDeJogo)
                         Console.WriteLine("1 - Sim");
                         Console.WriteLine("2 - Não, voltar ao Menu Principal");
                         string resposta = Console.ReadLine();
+
                         if(resposta == "1")
                         {
                             InicieJogadorVSPc();
                         }
+
                         else
                         {
-                            continuar = false; //DDDDDDDDDDDDAAAAAAAAAAAAAAAAAALLLLLLLLLLLLEEEEEEEEEEEEEEEEEE, SEXTOOOOOOOUUUUUUUUUUUUU
+                            continuar = false;
                         }
-       
                      }
 
                     else
@@ -459,14 +467,13 @@ while (!fimDeJogo)
                         {
                             InicieJogadorVSPc();
                         }
+
                         else
                         {
                            continuar = false;
                         }
     
-                    }
-
-                    return; // fim da partida
+                    } return; // fim da partida
                 }
             }
 

@@ -45,9 +45,18 @@ while (!fimDeJogo)
     Console.WriteLine("|||||||||||||||||||---MENU PRINCIPAL---||||||||||||||||||");
     Console.WriteLine("|=======================================================|");
     Console.WriteLine(" ");
+    Console.WriteLine("Bem vindo ao jogo da velha!");
+    Console.WriteLine(" ");
+    Console.WriteLine("=== INSTRUÇÕES DO JOGO === ");
+    Console.WriteLine("|----------------------------------------------------------------------------------------------------------------|");
+    Console.WriteLine("|1. O tabuleiro é composto por números de 1 a 9, onde cada número representa sua respectiva posição no tabuleiro.|");
+    Console.WriteLine("|2. Para fazer sua jogada, basta digitar o número correspondente à posição desejada no tabuleiro.                |");
+    Console.WriteLine("|3. O jogador 1 sempre será identificado pelo símbolo 'X' e o jogador 2 (ou computador) pelo símbolo 'O'.        |");
+    Console.WriteLine("|4. No modo Jogador vs Computador, cada jogada do computador terá um delay de 3s até ele realizar a jogada.      |");
+    Console.WriteLine("|----------------------------------------------------------------------------------------------------------------|");
+    Console.WriteLine(" ");
 
-   
-        Console.WriteLine("Bem vindo ao jogo da velha!");
+    Console.WriteLine("Bem vindo ao jogo da velha!");
         Console.WriteLine("Escolha o modo de jogo: ");
         Console.WriteLine("1 - Jogador vs Jogador");
         Console.WriteLine("2 - Jogador vs Computador");

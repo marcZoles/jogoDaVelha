@@ -23,37 +23,49 @@ int rankingJ1 = 0;
 int rankingJ2 = 0;
 int rankingPC = 0;
 int rankingJvP = 0;
-string centralizar = "centralizar";
-int larguraConsole = Console.WindowWidth;
-int espacosNecessarios = (larguraConsole - centralizar.Length) / 2;
-string posicionar = new string(' ', espacosNecessarios);
 bool sair = false;
 int modoDeJogoConvert;
 string resposta = "";
+string centralizar = "centralizar";
+int larguraConsole = Console.WindowWidth;
+
+
+float espacosNecessarios1 = (larguraConsole - centralizar.Length) / 5f;
+string posicionar1 = new string(' ', (int)espacosNecessarios1);
+
+
+float espacosNecessarios2 = (larguraConsole - centralizar.Length) / 3.7f;
+string posicionar2 = new string(' ', (int)espacosNecessarios2);
+
+float espacosNecessarios3 = (larguraConsole - centralizar.Length) / 2.4f;
+string posicionar3 = new string(' ', (int)espacosNecessarios3);
+
+
+
 
 // ========================================================|
 
 while (!fimDeJogo)
 {
     Console.Clear();
-    Console.WriteLine("|========================================================================|");
-    Console.WriteLine("|                    TRABALHO DE CONCLUSÃO DE MATÉRIA                    |");
-    Console.WriteLine("| FEITO POR: Gabriel Marczal; Bianca Michoski; Thais Colaço; José Guides |");
-    Console.WriteLine("|========================================================================|");
+    Console.WriteLine($"{posicionar1}|========================================================================|");
+    Console.WriteLine($"{posicionar1}|                    TRABALHO DE CONCLUSÃO DE MATÉRIA                    |");
+    Console.WriteLine($"{posicionar1}| FEITO POR: Gabriel Marczal; Bianca Michoski; Thais Colaço; José Guides |");
+    Console.WriteLine($"{posicionar1}|========================================================================|");
     Console.WriteLine(" ");
-    Console.WriteLine("|=======================================================|");
-    Console.WriteLine("|||||||||||||||||||---MENU PRINCIPAL---||||||||||||||||||");
-    Console.WriteLine("|=======================================================|");
+    Console.WriteLine($"{posicionar2}|=======================================================|");
+    Console.WriteLine($"{posicionar2}|||||||||||||||||||---MENU PRINCIPAL---||||||||||||||||||");
+    Console.WriteLine($"{posicionar2}|=======================================================|");
     Console.WriteLine(" ");
-    Console.WriteLine("Bem vindo ao jogo da velha!");
+    Console.WriteLine($"{posicionar3}Bem vindo ao jogo da velha!");
     Console.WriteLine(" ");
-    Console.WriteLine("=== INSTRUÇÕES DO JOGO === ");
-    Console.WriteLine("|----------------------------------------------------------------------------------------------------------------|");
-    Console.WriteLine("|1. O tabuleiro é composto por números de 1 a 9, onde cada número representa sua respectiva posição no tabuleiro.|");
-    Console.WriteLine("|2. Para fazer sua jogada, basta digitar o número correspondente à posição desejada no tabuleiro.                |");
-    Console.WriteLine("|3. O jogador 1 sempre será identificado pelo símbolo 'X' e o jogador 2 (ou computador) pelo símbolo 'O'.        |");
-    Console.WriteLine("|4. No modo Jogador vs Computador, cada jogada do computador terá um delay de 3s até ele realizar a jogada.      |");
-    Console.WriteLine("|----------------------------------------------------------------------------------------------------------------|");
+    Console.WriteLine($"{posicionar3} === INSTRUÇÕES DO JOGO === ");
+    Console.WriteLine("|--------------------------------------------------------------------------------------------------------------------|");
+    Console.WriteLine("|1. O tabuleiro é composto por números de 1 a 9, onde cada número representa sua respectiva posição no tabuleiro.    |");
+    Console.WriteLine("|2. Para fazer sua jogada, basta digitar o número correspondente à posição desejada no tabuleiro.                    |");
+    Console.WriteLine("|3. O jogador 1 sempre será identificado pelo símbolo 'X' e o jogador 2 (ou computador) pelo símbolo 'O'.            |");
+    Console.WriteLine("|4. No modo Jogador vs Computador, cada jogada do computador terá um delay de 3s até ele realizar a jogada.          |");
+    Console.WriteLine("|--------------------------------------------------------------------------------------------------------------------|");
     Console.WriteLine(" ");
 
     Console.WriteLine("Bem vindo ao jogo da velha!");
@@ -64,9 +76,8 @@ while (!fimDeJogo)
         Console.WriteLine("4 - Sair do Jogo");
         Console.Write("Selecione: ");
         string modoDeJogo = Console.ReadLine();
-        modoDeJogoConvert = Convert.ToInt32(modoDeJogo);
 
-        if (!int.TryParse(modoDeJogo, out modoDeJogoConvert))
+    if (!int.TryParse(modoDeJogo, out modoDeJogoConvert)) 
         {
         /* Esse if está em branco pois ele serve apenas para fazer a verificação se o usuário digitou um NUMERO
          * pq ele vai executar o código que está no switch, entao nao precisa de uma mensagem de erro
@@ -74,6 +85,8 @@ while (!fimDeJogo)
          * Precisamos adicionar o controle para solicitar um novo input ao usuário, caso ele digite algo inválido
          * Pq não está caindo no default do switch || - marcZ
          */
+        Console.WriteLine("Valor inválido digite novamente.");//funciona mais ou menos
+        Console.ReadLine();
     }
 
     Console.Clear();

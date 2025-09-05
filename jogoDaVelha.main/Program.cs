@@ -5,12 +5,6 @@
 
 // ========================================================|
 
-//                SETOR DE COMENTÁRIOS
-
-// Falta criar o modo difícil do jogo contra o computador || - marcZ
-
-// ========================================================|
-
 // Variáveis Globais
 
 Console.BackgroundColor = ConsoleColor.Gray;
@@ -29,20 +23,14 @@ string resposta = "";
 string centralizar = "centralizar";
 int larguraConsole = Console.WindowWidth;
 
-
-
 float espacosNecessarios1 = (larguraConsole - centralizar.Length) / 5f;
 string posicionar1 = new string(' ', (int)espacosNecessarios1);
-
 
 float espacosNecessarios2 = (larguraConsole - centralizar.Length) / 3.7f;
 string posicionar2 = new string(' ', (int)espacosNecessarios2);
 
 float espacosNecessarios3 = (larguraConsole - centralizar.Length) / 2.4f;
 string posicionar3 = new string(' ', (int)espacosNecessarios3);
-
-
-
 
 // ========================================================|
 for (int i = 1; i >= 1; i++)
@@ -63,14 +51,15 @@ for (int i = 1; i >= 1; i++)
     Console.WriteLine("|3. O jogador 1 sempre será identificado pelo símbolo 'X' e o jogador 2 (ou computador) pelo símbolo 'O'.            |");
     Console.WriteLine("|4. No modo Jogador vs Computador, cada jogada do computador terá um delay de 3s até ele realizar a jogada.          |");
     Console.WriteLine("|--------------------------------------------------------------------------------------------------------------------|\n");
+
     if (i > 1)
     {
         break;
     }
 }
+
 while (!fimDeJogo)
 {
-    Console.WriteLine("Bem vindo ao jogo da velha!");
     Console.WriteLine("Escolha o modo de jogo: ");
     Console.WriteLine("1 - Jogador vs Jogador");
     Console.WriteLine("2 - Jogador vs Computador");
@@ -108,7 +97,6 @@ while (!fimDeJogo)
                 continue; /* O continue, como o nome diz continua o loop (esse codigo esta dentro de um while, para que o usuário
                        * consiga digitar outra opção válida
                       */
-
         }
 
         static void CriarTabuleiro(string[,] tabuleiro)
@@ -255,10 +243,11 @@ while (!fimDeJogo)
                             {
                                 InicieJogadorVSJogador();
                             }
-                        else
-                        {
-                            mostreMenu();
-                        }
+
+                            else
+                            {
+                                mostreMenu();
+                            }
 
                             return;
                         }
@@ -278,7 +267,7 @@ while (!fimDeJogo)
                         if (resposta != "1")
                         {
                             mostreMenu();
-                    }
+                        }
                     }
                 }
 
@@ -290,7 +279,6 @@ while (!fimDeJogo)
 
         void InicieJogadorVSPc()
         {
-
             bool continuar = true;
 
             do
@@ -302,7 +290,6 @@ while (!fimDeJogo)
                 Console.WriteLine("Selecione a dificuldade do jogo: ");
                 Console.WriteLine("D - Dificil");
                 Console.WriteLine("F - Facil");
-
 
                 string dificuldade = Console.ReadLine().ToUpper();
                 {
@@ -479,7 +466,7 @@ while (!fimDeJogo)
                             else
                             {
                                mostreMenu();
-                        }
+                            }
 
                         }
                         return; // fim da partida
@@ -558,25 +545,29 @@ while (!fimDeJogo)
             // Nenhum vencedor
             return "";
         }
+
         void JogueNovamente()
         {
             Console.WriteLine("Deseja jogar novamente?");
             Console.WriteLine("1 - Sim");
             Console.WriteLine("2 - Não, voltar ao Menu Principal");
         }
+
         void mostreMenu()
         {
-        Console.Clear();
-        Console.WriteLine("Bem vindo ao jogo da velha!");
-            Console.WriteLine("Escolha o modo de jogo: ");
-            Console.WriteLine("1 - Jogador vs Jogador");
-            Console.WriteLine("2 - Jogador vs Computador");
-            Console.WriteLine("3 - Exibir Ranking");
-            Console.WriteLine("4 - Sair do Jogo");
-            Console.Write("Selecione: \n");
+            Console.Clear();
+            Console.WriteLine($"{posicionar2}|=======================================================|");
+            Console.WriteLine($"{posicionar2}|||||||||||||||||||---MENU PRINCIPAL---||||||||||||||||||");
+            Console.WriteLine($"{posicionar2}|=======================================================|\n");
+            Console.WriteLine($"{posicionar2}Escolha o modo de jogo: ");
+            Console.WriteLine($"{posicionar2}1 - Jogador vs Jogador");
+            Console.WriteLine($"{posicionar2}2 - Jogador vs Computador");
+            Console.WriteLine($"{posicionar2}3 - Exibir Ranking");
+            Console.WriteLine($"{posicionar2}4 - Sair do Jogo");
+            Console.Write($"{posicionar2}Selecione: ");
             string modoDeJogo = Console.ReadLine();
             modoDeJogoConvert = Convert.ToInt32(modoDeJogo);
-        Console.Clear();
+            Console.Clear();
 
     }
 
@@ -586,9 +577,8 @@ while (!fimDeJogo)
         {
             fimDeJogo = true;
         }
-    }
 
- // Fim do while principal
+} // Fim do while principal
 
 
 

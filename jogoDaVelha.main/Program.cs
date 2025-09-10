@@ -583,16 +583,6 @@ while (!fimDeJogo)
             Console.WriteLine($"{posicionar2}|=======================================================|");
             Console.WriteLine($"{posicionar2}|||||||||||||||||||---MENU PRINCIPAL---||||||||||||||||||");
             Console.WriteLine($"{posicionar2}|=======================================================|\n");
-            Console.WriteLine($"{posicionar2}Escolha o modo de jogo: ");
-            Console.WriteLine($"{posicionar2}1 - Jogador vs Jogador");
-            Console.WriteLine($"{posicionar2}2 - Jogador vs Computador");
-            Console.WriteLine($"{posicionar2}3 - Exibir Ranking");
-            Console.WriteLine($"{posicionar2}4 - Sair do Jogo");
-            Console.Write($"{posicionar2}Selecione: ");
-            string modoDeJogo = Console.ReadLine();
-            modoDeJogoConvert = Convert.ToInt32(modoDeJogo);
-          
-
             
         }
 

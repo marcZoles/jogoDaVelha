@@ -497,18 +497,272 @@ while (!fimDeJogo)
         }
 
 
-        //=============================================================================================//
+    //=============================================================================================//
 
-        static void InicieModoDificil()
+    void InicieModoDificil()
+    {
+        string[,] tabuleiro = new string[3, 3];
+        string jogador1 = "X";
+        string computador = "O";
+        string turno = "X";
+        int contadorTurnos = 0;
+
+        string mensagemVitoriaJogador = "O Jogador ( X ) Ganhou!";
+        string mensagemVitoriaPC = "O Computador ( O ) Ganhou!";
+
+        Console.WriteLine("|---------------------|");
+        Console.WriteLine("|=== Modo Difícil ====|");
+        Console.WriteLine("|---------------------|");
+
+        CriarTabuleiro(tabuleiro);
+        ImprimirTabuleiro(tabuleiro);
+
+        while (contadorTurnos < 9)
         {
-            Console.WriteLine("|--------------------|");
-            Console.WriteLine("|=== Modo Dificil ===|");
-            Console.WriteLine("|--------------------|");
+            string jogada = "";
+
+            if (turno == computador)
+            {
+                Console.WriteLine("|====================================================|");
+                Console.WriteLine("|=========|        Vez do Computador       |=========|");
+                Console.WriteLine("|====================================================|");
+                Console.Write("O computador está pensando");
+                Console.Write(".");
+                Thread.Sleep(1000);
+                Console.Write(".");
+                Thread.Sleep(1000);
+                Console.Write(".");
+                Thread.Sleep(2000);
+
+                // Calcula a melhor jogada com Minimax
+                (int linha, int coluna) mov = MelhorJogada(tabuleiro, computador, jogador1);
+                // pega a representação textual da posição (1..9) para reusar seu código de update do tabuleiro
+                jogada = tabuleiro[mov.linha, mov.coluna];
+            }
+            else
+            {
+                Console.WriteLine("|====================================|");
+                Console.Write($" Vez do Jogador {turno}: ");
+                jogada = Console.ReadLine();
+                Console.WriteLine("|====================================|");
+
+                // Validação se jogada é valida
+                bool jogadaValida = false;
+                while (!jogadaValida)
+                {
+                    if (int.TryParse(jogada, out int posicao) && posicao >= 1 && posicao <= 9)
+                    {
+                        int linha = (posicao - 1) / 3;
+                        int coluna = (posicao - 1) % 3;
+
+                        if (tabuleiro[linha, coluna] != "X" && tabuleiro[linha, coluna] != "O")
+                        {
+                            jogadaValida = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Esta posição já está ocupada! Tente novamente.");
+                            jogada = Console.ReadLine();
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Jogada inválida! Digite um número de 1 a 9.");
+                        jogada = Console.ReadLine();
+                    }
+                }
+            }
+
+            // Atualiza tabuleiro (mesma lógica do modo fácil)
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (jogada == tabuleiro[i, j])
+                    {
+                        tabuleiro[i, j] = turno;
+                    }
+                }
+            }
+
+            ImprimirTabuleiro(tabuleiro);
+
+            if (contadorTurnos >= 4)
+            {
+                string vencedor = VerificarVencedor(tabuleiro);
+
+                if (vencedor == "X" || vencedor == "O")
+                {
+                    if (vencedor == "X")
+                    {
+                        Console.WriteLine(mensagemVitoriaJogador);
+                        rankingJvP++;
+
+                        Console.WriteLine(" ");
+                        Console.WriteLine("=============== Ranking ===============");
+                        Console.WriteLine($"Jogador (X): {rankingJvP} vitórias");
+                        Console.WriteLine($"Computador (O): {rankingPC} vitórias");
+                        Console.WriteLine("=======================================\n");
+                        JogueNovamente();
+                        string resposta = Console.ReadLine();
+
+                        if (resposta == "1")
+                            InicieJogadorVSPc();
+                        else
+                            mostreMenu();
+                    }
+                    else
+                    {
+                        Console.WriteLine(mensagemVitoriaPC);
+                        rankingPC++;
+
+                        Console.WriteLine(" ");
+                        Console.WriteLine("=============== Ranking ===============");
+                        Console.WriteLine($"Jogador (X): {rankingJvP} vitórias");
+                        Console.WriteLine($"Computador (O): {rankingPC} vitórias");
+                        Console.WriteLine("=======================================\n");
+
+                        JogueNovamente();
+                        string resposta = Console.ReadLine();
+
+                        if (resposta == "1")
+                            InicieJogadorVSPc();
+                        else
+                            mostreMenu();
+                    }
+                    return; // fim da partida
+                }
+            }
+
+            contadorTurnos++;
+
+            // Alterna turno
+            turno = (turno == jogador1) ? computador : jogador1;
+
+            if (contadorTurnos == 9)
+            {
+                Console.WriteLine("Deu velha! Ninguém ganhou dessa vez :(");
+                JogueNovamente();
+                return;
+            }
+        }
+    }
+
+    // ------------------ MelhorJogada (usa Minimax) ------------------ //
+
+
+    (int, int) MelhorJogada(string[,] tabuleiro, string computador, string jogador)
+    {
+        int melhorValor = int.MinValue;
+        (int, int) melhorMovimento = (-1, -1);
+
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                if (tabuleiro[i, j] != "X" && tabuleiro[i, j] != "O")
+                {
+                    string temp = tabuleiro[i, j];
+                    tabuleiro[i, j] = computador;
+
+                    int valor = Minimax(tabuleiro, 0, false, computador, jogador, int.MinValue, int.MaxValue);
+
+                    tabuleiro[i, j] = temp;
+
+                    if (valor > melhorValor)
+                    {
+                        melhorValor = valor;
+                        melhorMovimento = (i, j);
+                    }
+                }
+            }
         }
 
-        //==============================================================================================//
+        // fallback se nada encontrado (não deve ocorrer)
+        if (melhorMovimento.Item1 == -1)
+        {
+            for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
+                    if (tabuleiro[i, j] != "X" && tabuleiro[i, j] != "O")
+                        return (i, j);
+        }
 
-        void ExibirRanking(int rankingJ1, int rankingJ2, int rankingJvP, int rankingPC)
+        return melhorMovimento;
+    }
+
+    // ------------------ Minimax com poda alfa-beta ------------------ //
+
+
+    int Minimax(string[,] tabuleiro, int profundidade, bool isMaximizing, string computador, string jogador, int alpha, int beta)
+    {
+        // Estado terminal?
+        string vencedor = VerificarVencedor(tabuleiro);
+        if (vencedor == computador) return 10 - profundidade; // quanto mais cedo ganhar, melhor
+        if (vencedor == jogador) return profundidade - 10;     // quanto mais tarde perder, "menos ruim"
+
+        // Tabuleiro cheio -> empate
+        bool cheio = true;
+        for (int r = 0; r < 3; r++)
+            for (int c = 0; c < 3; c++)
+                if (tabuleiro[r, c] != "X" && tabuleiro[r, c] != "O")
+                    cheio = false;
+
+        if (cheio) return 0;
+
+        if (isMaximizing)
+        {
+            int melhor = int.MinValue;
+            for (int r = 0; r < 3; r++)
+            {
+                for (int c = 0; c < 3; c++)
+                {
+                    if (tabuleiro[r, c] != "X" && tabuleiro[r, c] != "O")
+                    {
+                        string temp = tabuleiro[r, c];
+                        tabuleiro[r, c] = computador;
+
+                        int valor = Minimax(tabuleiro, profundidade + 1, false, computador, jogador, alpha, beta);
+
+                        tabuleiro[r, c] = temp;
+
+                        if (valor > melhor) melhor = valor;
+                        if (valor > alpha) alpha = valor;
+                        if (beta <= alpha) return melhor; // poda
+                    }
+                }
+            }
+            return melhor;
+        }
+        else
+        {
+            int pior = int.MaxValue;
+            for (int r = 0; r < 3; r++)
+            {
+                for (int c = 0; c < 3; c++)
+                {
+                    if (tabuleiro[r, c] != "X" && tabuleiro[r, c] != "O")
+                    {
+                        string temp = tabuleiro[r, c];
+                        tabuleiro[r, c] = jogador;
+
+                        int valor = Minimax(tabuleiro, profundidade + 1, true, computador, jogador, alpha, beta);
+
+                        tabuleiro[r, c] = temp;
+
+                        if (valor < pior) pior = valor;
+                        if (valor < beta) beta = valor;
+                        if (beta <= alpha) return pior; // poda
+                    }
+                }
+            }
+            return pior;
+        }
+    }
+
+
+    //==============================================================================================//
+
+    void ExibirRanking(int rankingJ1, int rankingJ2, int rankingJvP, int rankingPC)
         {
         Console.Clear();
         Console.WriteLine("=============== Ranking ===============");

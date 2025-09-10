@@ -67,7 +67,15 @@ while (!fimDeJogo)
     Console.WriteLine("4 - Sair do Jogo");
     Console.Write("Selecione: \n");
     string modoDeJogo = Console.ReadLine();
-    modoDeJogoConvert = Convert.ToInt32(modoDeJogo);
+    bool modoDeJogoInvalido = int.TryParse(modoDeJogo, out modoDeJogoConvert);
+
+    if(modoDeJogoInvalido == false)
+    {
+        Console.Clear();
+        Console.WriteLine("Opção inválida! Tente novamente digitando um valor númerico ou uma das opções abaixo\n\n");
+
+        continue;
+    }
 
 
 
@@ -261,8 +269,9 @@ while (!fimDeJogo)
                     if (contadorTurnos == 9)
                     {
                         Console.WriteLine("Deu velha! Ninguém ganhou dessa vez :(");
-                        
-                        string resposta = Console.ReadLine();
+                        JogueNovamente();
+
+                    string resposta = Console.ReadLine();
 
                         if (resposta != "1")
                         {
@@ -501,7 +510,8 @@ while (!fimDeJogo)
 
         void ExibirRanking(int rankingJ1, int rankingJ2, int rankingJvP, int rankingPC)
         {
-            Console.WriteLine("=============== Ranking ===============");
+        Console.Clear();
+        Console.WriteLine("=============== Ranking ===============");
             Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
             Console.WriteLine($"Jogador 2 (O): {rankingJ2} vitórias");
             Console.WriteLine("=======================================");
@@ -510,6 +520,8 @@ while (!fimDeJogo)
             Console.WriteLine("=======================================");
             Console.WriteLine("Pressione Enter para voltar ao menu principal...");
             Console.ReadLine();
+
+
         }
 
         //=============================================================================================//
@@ -556,6 +568,18 @@ while (!fimDeJogo)
         void mostreMenu()
         {
             Console.Clear();
+
+            Console.WriteLine($"{posicionar1}|========================================================================|");
+            Console.WriteLine($"{posicionar1}|                    TRABALHO DE CONCLUSÃO DE MATÉRIA                    |");
+            Console.WriteLine($"{posicionar1}| FEITO POR: Gabriel Marczal; Bianca Michoski; Thais Colaço; José Guides |");
+            Console.WriteLine($"{posicionar1}|========================================================================|\n");
+            Console.WriteLine($"{posicionar3} === INSTRUÇÕES DO JOGO === \n");
+            Console.WriteLine("|--------------------------------------------------------------------------------------------------------------------|");
+            Console.WriteLine("|1. O tabuleiro é composto por números de 1 a 9, onde cada número representa sua respectiva posição no tabuleiro.    |");
+            Console.WriteLine("|2. Para fazer sua jogada, basta digitar o número correspondente à posição desejada no tabuleiro.                    |");
+            Console.WriteLine("|3. O jogador 1 sempre será identificado pelo símbolo 'X' e o jogador 2 (ou computador) pelo símbolo 'O'.            |");
+            Console.WriteLine("|4. No modo Jogador vs Computador, cada jogada do computador terá um delay de 3s até ele realizar a jogada.          |");
+            Console.WriteLine("|--------------------------------------------------------------------------------------------------------------------|\n");
             Console.WriteLine($"{posicionar2}|=======================================================|");
             Console.WriteLine($"{posicionar2}|||||||||||||||||||---MENU PRINCIPAL---||||||||||||||||||");
             Console.WriteLine($"{posicionar2}|=======================================================|\n");
@@ -567,9 +591,10 @@ while (!fimDeJogo)
             Console.Write($"{posicionar2}Selecione: ");
             string modoDeJogo = Console.ReadLine();
             modoDeJogoConvert = Convert.ToInt32(modoDeJogo);
-            Console.Clear();
+          
 
-    }
+            
+        }
 
         //=============================================================================================//
 

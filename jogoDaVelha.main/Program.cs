@@ -528,11 +528,11 @@ while (!fimDeJogo)
                 Console.WriteLine("|====================================================|");
                 Console.Write("O computador está pensando");
                 Console.Write(".");
-                Thread.Sleep(1000);
-                Console.Write(".");
-                Thread.Sleep(1000);
-                Console.Write(".");
-                Thread.Sleep(2000);
+               // Thread.Sleep(1000);
+               // Console.Write(".");
+               // Thread.Sleep(1000);
+               // Console.Write(".");
+               // Thread.Sleep(2000);
 
                 // Calcula a melhor jogada com Minimax
                 (int linha, int coluna) mov = MelhorJogada(tabuleiro, computador, jogador1);
@@ -606,12 +606,16 @@ while (!fimDeJogo)
                         JogueNovamente();
                         string resposta = Console.ReadLine();
 
-                        if (resposta == "1")
-                            InicieJogadorVSPc();
-                        else
-                            mostreMenu();
+                    if (resposta == "1") 
+                    { 
+                        InicieJogadorVSPc();
                     }
-                    else
+                    else 
+                    { 
+                         mostreMenu();
+                    }
+                    }
+                    else if ( vencedor == "O")
                     {
                         Console.WriteLine(mensagemVitoriaPC);
                         rankingPC++;
@@ -626,11 +630,16 @@ while (!fimDeJogo)
                         string resposta = Console.ReadLine();
 
                         if (resposta == "1")
+                        {
                             InicieJogadorVSPc();
+                        }
                         else
+                        {
                             mostreMenu();
-                    }
-                    return; // fim da partida
+                        }
+                    } 
+                    
+                      return; // fim da partida
                 }
             }
 
@@ -639,10 +648,21 @@ while (!fimDeJogo)
             // Alterna turno
             turno = (turno == jogador1) ? computador : jogador1;
 
+
             if (contadorTurnos == 9)
             {
                 Console.WriteLine("Deu velha! Ninguém ganhou dessa vez :(");
                 JogueNovamente();
+                string resposta = Console.ReadLine();
+
+                if (resposta == "1")
+                {
+                    InicieJogadorVSPc();
+                }
+                else
+                {
+                    mostreMenu();
+                }
                 return;
             }
         }

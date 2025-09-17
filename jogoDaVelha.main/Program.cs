@@ -313,8 +313,7 @@ while (!fimDeJogo)
                             break;
 
                         default:
-                            Console.WriteLine("Opção invalida"); // Adicionar controle para solicitar novo input ao usuário,
-                                                                 // Atualmente não está funcionando e volta ao menu principal || - marcZ
+                            Console.WriteLine("Opção invalida");
                             break;
                     }
                 }
@@ -497,13 +496,15 @@ while (!fimDeJogo)
                 {
                     InicieJogadorVSPc();
                 }
+
                 else
                 {
                     mostreMenu();
                 }
+
                 return;
-                return;
-                } 
+                return; // precisa desse return para sair do while?
+            } 
             }
         }
 
@@ -539,7 +540,7 @@ while (!fimDeJogo)
                 Console.WriteLine("|====================================================|");
                 Console.Write("O computador está pensando");
                 Console.Write(".");
-               Thread.Sleep(1000);
+                Thread.Sleep(1000);
                 Console.Write(".");
                 Thread.Sleep(1000);
                 Console.Write(".");
@@ -550,6 +551,7 @@ while (!fimDeJogo)
                 // pega a representação textual da posição (1..9) para reusar seu código de update do tabuleiro
                 jogada = tabuleiro[mov.linha, mov.coluna];
             }
+
             else
             {
                 Console.WriteLine("|====================================|");
@@ -570,12 +572,14 @@ while (!fimDeJogo)
                         {
                             jogadaValida = true;
                         }
+
                         else
                         {
                             Console.WriteLine("Esta posição já está ocupada! Tente novamente.");
                             jogada = Console.ReadLine();
                         }
                     }
+
                     else
                     {
                         Console.WriteLine("Jogada inválida! Digite um número de 1 a 9.");
@@ -617,15 +621,17 @@ while (!fimDeJogo)
                         JogueNovamente();
                         string resposta = Console.ReadLine();
 
-                    if (resposta == "1") 
-                    { 
+                        if (resposta == "1") 
+                        { 
                         InicieJogadorVSPc();
-                    }
-                    else 
-                    { 
+                        }
+
+                        else 
+                        { 
                          mostreMenu();
+                        }
                     }
-                    }
+
                     else if ( vencedor == "O")
                     {
                         Console.WriteLine(mensagemVitoriaPC);
@@ -644,12 +650,12 @@ while (!fimDeJogo)
                         {
                             InicieJogadorVSPc();
                         }
+
                         else
                         {
                             mostreMenu();
                         }
                     } 
-                    
                       return; // fim da partida
                 }
             }
@@ -670,6 +676,7 @@ while (!fimDeJogo)
                 {
                     InicieJogadorVSPc();
                 }
+
                 else
                 {
                     mostreMenu();
@@ -764,6 +771,7 @@ while (!fimDeJogo)
             }
             return melhor;
         }
+
         else
         {
             int pior = int.MaxValue;
@@ -794,7 +802,7 @@ while (!fimDeJogo)
     //==============================================================================================//
 
     void ExibirRanking(int rankingJ1, int rankingJ2, int rankingJvP, int rankingPC)
-        {
+    {
         Console.Clear();
         Console.WriteLine("=============== Ranking ===============");
             Console.WriteLine($"Jogador 1 (X): {rankingJ1} vitórias");
@@ -807,7 +815,7 @@ while (!fimDeJogo)
             Console.ReadLine();
 
 
-        }
+    }
 
         //=============================================================================================//
 

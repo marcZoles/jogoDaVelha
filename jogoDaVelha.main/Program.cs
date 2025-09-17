@@ -491,7 +491,18 @@ while (!fimDeJogo)
                 {
                     Console.WriteLine("Deu velha! Ninguém ganhou dessa vez :(");
                     JogueNovamente();
-                    return;
+                string resposta = Console.ReadLine();
+
+                if (resposta == "1")
+                {
+                    InicieJogadorVSPc();
+                }
+                else
+                {
+                    mostreMenu();
+                }
+                return;
+                return;
                 } 
             }
         }
@@ -528,11 +539,11 @@ while (!fimDeJogo)
                 Console.WriteLine("|====================================================|");
                 Console.Write("O computador está pensando");
                 Console.Write(".");
-               // Thread.Sleep(1000);
-               // Console.Write(".");
-               // Thread.Sleep(1000);
-               // Console.Write(".");
-               // Thread.Sleep(2000);
+               Thread.Sleep(1000);
+                Console.Write(".");
+                Thread.Sleep(1000);
+                Console.Write(".");
+                Thread.Sleep(2000);
 
                 // Calcula a melhor jogada com Minimax
                 (int linha, int coluna) mov = MelhorJogada(tabuleiro, computador, jogador1);

@@ -273,10 +273,15 @@ while (!fimDeJogo)
 
                     string resposta = Console.ReadLine();
 
-                        if (resposta != "1")
+                        if (resposta == "1")
                         {
-                            mostreMenu();
+                            InicieJogadorVSJogador();
                         }
+                    else
+                    {
+                        mostreMenu();
+                    }
+                        return;
                     }
                 }
 

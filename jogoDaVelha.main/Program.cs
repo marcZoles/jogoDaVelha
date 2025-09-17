@@ -661,7 +661,7 @@ while (!fimDeJogo)
                             mostreMenu();
                         }
                     } 
-                      return; // fim da partida
+                 return; // fim da partida
                 }
             }
 
